@@ -1,4 +1,3 @@
-
 ------------------------------------------------------------------------
 ---IMPORTS
 ------------------------------------------------------------------------
@@ -17,6 +16,7 @@ import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings)
 import XMonad.Util.Run (safeSpawn, unsafeSpawn, runInTerm, spawnPipe)
 import XMonad.Util.Cursor
 import XMonad.Util.NamedScratchpad
+import XMonad.Util.SpawnOnce
 
     -- Hooks
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
@@ -75,6 +75,7 @@ myTextEditor    = "vim"     -- Sets default text editor
 myBorderWidth   = 2         -- Sets border width for windows
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
+main :: IO ()
 main = do
     -- Launching xmobar.
     xmproc <- spawnPipe "xmobar $HOME/.config/xmobar/xmobar.hs"
@@ -97,10 +98,13 @@ main = do
         , terminal           = myTerminal
         , layoutHook         = myLayoutHook 
         , workspaces         = myWorkspaces
-	, borderWidth        = myBorderWidth
+        , borderWidth        = myBorderWidth
         , normalBorderColor  = "#292d3e"
         , focusedBorderColor = "#bbc5ff"
-        , startupHook = setDefaultCursor xC_left_ptr
+        , startupHook = do
+                  setDefaultCursor xC_left_ptr
+                  spawnOnce "/usr/bin/emacs --daemon &"
+                  spawnOnce "~/.fehbg"
         } `additionalKeysP`         myKeys 
 
        
@@ -154,6 +158,8 @@ myKeys =
     --- Brightness control
 	, ("<XF86MonBrightnessUp>", spawn "brightnessctl set +3%")
 	, ("<XF86MonBrightnessDown>", spawn "brightnessctl set 3%-")
+	, ("S-<XF86MonBrightnessDown>", spawn "brightnessctl set 1%-")
+	, ("S-<XF86MonBrightnessUp>", spawn "brightnessctl set +1%")
 
     --- Volume control
 	, ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+")
@@ -193,18 +199,18 @@ myKeys =
         
         , ("M-C-M1-<Up>", sendMessage Arrange)
         , ("M-C-M1-<Down>", sendMessage DeArrange)
-        , ("M-<Up>", sendMessage (MoveUp 10))             --  Move focused window to up
-        , ("M-<Down>", sendMessage (MoveDown 10))         --  Move focused window to down
-        , ("M-<Right>", sendMessage (MoveRight 10))       --  Move focused window to right
-        , ("M-<Left>", sendMessage (MoveLeft 10))         --  Move focused window to left
-        , ("M-S-<Up>", sendMessage (IncreaseUp 10))       --  Increase size of focused window up
-        , ("M-S-<Down>", sendMessage (IncreaseDown 10))   --  Increase size of focused window down
-        , ("M-S-<Right>", sendMessage (IncreaseRight 10)) --  Increase size of focused window right
-        , ("M-S-<Left>", sendMessage (IncreaseLeft 10))   --  Increase size of focused window left
-        , ("M-C-<Up>", sendMessage (DecreaseUp 10))       --  Decrease size of focused window up
-        , ("M-C-<Down>", sendMessage (DecreaseDown 10))   --  Decrease size of focused window down
-        , ("M-C-<Right>", sendMessage (DecreaseRight 10)) --  Decrease size of focused window right
-        , ("M-C-<Left>", sendMessage (DecreaseLeft 10))   --  Decrease size of focused window left
+   --     , ("M-<Up>", sendMessage (MoveUp 10))             --  Move focused window to up
+   --     , ("M-<Down>", sendMessage (MoveDown 10))         --  Move focused window to down
+   --     , ("M-<Right>", sendMessage (MoveRight 10))       --  Move focused window to right
+   --     , ("M-<Left>", sendMessage (MoveLeft 10))         --  Move focused window to left
+   --     , ("M-S-<Up>", sendMessage (IncreaseUp 10))       --  Increase size of focused window up
+   --     , ("M-S-<Down>", sendMessage (IncreaseDown 10))   --  Increase size of focused window down
+   --     , ("M-S-<Right>", sendMessage (IncreaseRight 10)) --  Increase size of focused window right
+   --     , ("M-S-<Left>", sendMessage (IncreaseLeft 10))   --  Increase size of focused window left
+   --     , ("M-C-<Up>", sendMessage (DecreaseUp 10))       --  Decrease size of focused window up
+   --     , ("M-C-<Down>", sendMessage (DecreaseDown 10))   --  Decrease size of focused window down
+   --     , ("M-C-<Right>", sendMessage (DecreaseRight 10)) --  Decrease size of focused window right
+   --     , ("M-C-<Left>", sendMessage (DecreaseLeft 10))   --  Decrease size of focused window left
 
     --- Layouts
         , ("M-<Space>", sendMessage NextLayout)                              -- Switch to next layout
@@ -236,7 +242,9 @@ myKeys =
 
     --- Scratchpads
         , ("M-v", namedScratchpadAction myScratchPads "ncmpcpp")
-        
+        , ("M-d", namedScratchpadAction myScratchPads "emacs")
+        , ("M-S-<Return>", namedScratchpadAction myScratchPads "scratchpad")
+
     --- Open Terminal
         , ("M-<Return>", spawn myTerminal)
         ] where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
@@ -250,10 +258,10 @@ myManageHook = composeAll
       , className =? "mpv"          --> doShift "vid"
       , className =? "qutebrowser"  --> doShift "www"
       , className =? "librewolf"    --> doShift "www"
-      , className =? "dosbox"       --> doShift "dos"
-      -- , className =? "ranger"       --> doShift "term"
+      , className =? "code"         --> doShift "dev"
       , className =? "apadoc"       --> doShift "doc"
       , className =? "MuPDF"        --> doShift "doc"
+      , className =? "rangerqute"   --> doFloat
      ] <+> namedScratchpadManageHook myScratchPads
 
 ------------------------------------------------------------------------
@@ -273,6 +281,9 @@ floats     = renamed [Replace "floats"]   $ limitWindows 20 $ simplestFloat
 
 myScratchPads = [
         NS "ncmpcpp" (myTerminal ++ " --class ncmpcpp -e ncmpcpp") (resource =? "ncmpcpp")
-         (customFloating $ W.RationalRect (0.1) (0.1) (0.8) (0.8))
+         (customFloating $ W.RationalRect (0.05) (0.05) (0.9) (0.9))
+      , NS "emacs" ("emacsclient -c -a \"emacs\"") (resource =? "emacs")
+         (customFloating $ W.RationalRect (0.05) (0.05) (0.9) (0.9))
+      , NS "scratchpad" (myTerminal ++ " --class scratchpad") (resource =? "scratchpad")
+         (customFloating $ W.RationalRect (0.05) (0.05) (0.9) (0.9))
  ]
-
