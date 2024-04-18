@@ -1,0 +1,7 @@
+SoundDriver = ALSA
+
+Theme = darkdot_theme
+ReadTags = no
+ShowFormat = no
+ShowTime = no
+TagsCacheSize = 0
