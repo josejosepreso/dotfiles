@@ -1,6 +1,0 @@
-#! /usr/bin/bash
-
-banner $@ >> $@.md
-echo "@date" $(date +%D) >> $@.md
-echo "@version 0.1.0" >> $@.md
-echo "@author jrbautista@unah.hn" >> $@.md
