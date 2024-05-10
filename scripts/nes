@@ -1,5 +1,3 @@
-#! /usr/bin/bash
+#!/usr/bin/sh
 
-g=$(find /home/jose/Downloads/Nintendo | dmenu -i -l 30)
-
-nestopia -f "$g"
+find /home/jose/Downloads/Nintendo | dmenu -i -l 30 | xargs -d '\n' -r nestopia -f

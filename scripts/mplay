@@ -1,3 +1,3 @@
 #! /usr/bin/sh
 
-find /home/jose/Music/ | dmenu -i -l 30 | mpv --force-window=yes --no-audio-display --playlist=-
+find /home/jose/Music/ | dmenu -i -l 30 | xargs -d '\n' mpv --force-window=yes --no-audio-display
