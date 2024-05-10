@@ -14,7 +14,7 @@ while true; do
 
 	[ "$(cat /sys/class/power_supply/BAT1/status)" = "Charging" ] && BATTSTAT=" ^"
 
-	# xsetroot -name "UPDT: $UPD | SSD: $DISK | CPU: $TEMP | MEM: $MEM | $(date '+%D, %R') | BATT: $BATT%$BATTSTAT"
+	#xsetroot -name "UPDT: $UPD | SSD: $DISK | CPU: $TEMP | MEM: $MEM | $(date '+%D, %R') | BATT: $BATT%$BATTSTAT"
 	xsetroot -name "󰇚 $UPD | 󰨣 $DISK |  $TEMP |  $MEM |  $(date '+%D, %R') |  $BATT%$BATTSTAT"
 
 	sleep 30
