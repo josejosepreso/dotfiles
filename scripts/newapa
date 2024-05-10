@@ -1,0 +1,14 @@
+#! /usr/bin/bash
+
+new=$(echo -e | dmenu -p "New document:")
+
+if [ ! "$new" ]; then
+	echo ""
+else
+	cp -r ~/Documents/LaTeX/apa7 ~/Documents/LaTeX/$new
+
+	cd ~/Documents/LaTeX/$new/
+	pdflatex main.tex
+	mupdf ~/Documents/LaTeX/$new/main.pdf &
+	alacritty --class apadoc -e vim ~/Documents/LaTeX/$new/main.tex
+fi

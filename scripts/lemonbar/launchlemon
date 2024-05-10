@@ -1,0 +1,7 @@
+#!/bin/bash
+
+killall -q lemonbar
+killall -q lemonconfig
+
+/home/jose/scripts/lemonbar/lemonconfig  | lemonbar -p -B "#FF222222"
+# lemonconfig | lemonbar -p

@@ -1,0 +1,5 @@
+#! /usr/bin/bash
+
+g=$(find /home/jose/Downloads/Nintendo | dmenu -i -l 30)
+
+nestopia -f "$g"
