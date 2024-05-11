@@ -6,6 +6,8 @@ set ignorecase true
 # Keybindings
 map p paste
 map <enter> open
+map sw setwallpaper
+map sS telegram
 
 # Custom functions
 ## Open file/folder
@@ -20,3 +22,9 @@ cmd mkdir ${{
 
 ## Set wallpaper
 cmd setwallpaper $set -f; feh --bg-fill "$f"
+
+## Send to telegram saved messages
+cmd telegram ${{
+	cd /home/jose
+	telegram -f "$f"
+}}
