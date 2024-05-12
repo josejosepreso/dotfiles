@@ -73,6 +73,7 @@ myModMask       = mod4Mask  -- Sets modkey to super/windows key
 myTerminal      = "alacritty"      -- Sets default terminal
 myTextEditor    = "vim"     -- Sets default text editor
 myBorderWidth   = 2         -- Sets border width for windows
+myEmacs = "emacsclient -c -a ''"
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 main :: IO ()
@@ -88,7 +89,7 @@ main = do
                         , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
                         , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
                         , ppHiddenNoWindows = xmobarColor "#F07178" ""        -- Hidden workspaces (no windows)
-                        , ppTitle = xmobarColor "#d0d0d0" "" . shorten 35     -- Title of active window in xmobar
+                        , ppTitle = xmobarColor "#d0d0d0" "" . shorten 70     -- Title of active window in xmobar
                         , ppSep =  "<fc=#9AEDFE> : </fc>"                     -- Separators in xmobar
                         , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"  -- Urgent workspace
                         , ppExtras  = [windowCount]                           -- # of windows current workspace
@@ -103,9 +104,7 @@ main = do
         , focusedBorderColor = "#bbc5ff"
         , startupHook = do
                   setDefaultCursor xC_left_ptr
-                  spawnOnce "/usr/bin/emacs --daemon &"
-                  spawnOnce "~/.fehbg"
-        } `additionalKeysP`         myKeys 
+        } `additionalKeysP`         myKeys
 
        
 ------------------------------------------------------------------------
@@ -149,6 +148,7 @@ myWorkspaces = (map xmobarEscape) $ ["hom", "dev", "term", "doc", "git", "pt", "
 --------------------------------------------------------------------------------------------------------------------------
 ---KEYBINDINGS
 ------------------------------------------------------------------------
+myKeys :: [(String, X ())]
 myKeys =
     --- Xmonad
         [ ("M-C-r", spawn "xmonad --recompile")      -- Recompiles xmonad
@@ -219,8 +219,7 @@ myKeys =
 	, ("M-S-=", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts) -- Toggles noborder/full
 	, ("M-S-f", sendMessage (T.Toggle "float"))
 	, ("M-S-x", sendMessage $ Toggle REFLECTX)
-	, ("M-S-y", sendMessage $ Toggle REFLECTY)
-	, ("M-S-m", sendMessage $ Toggle MIRROR)
+	--, ("M-S-y", sendMessage $ Toggle REFLECTY)
 	, ("M-<KP_Multiply>", sendMessage (IncMasterN 1))   -- Increase number of clients in the master pane
 	, ("M-<KP_Divide>", sendMessage (IncMasterN (-1)))  -- Decrease number of clients in the master pane
 	, ("M-S-<KP_Multiply>", increaseLimit)              -- Increase number of windows that can be shown
@@ -238,7 +237,8 @@ myKeys =
         , ("M-<Tab>", CWS.toggleWS)                        -- Go to last visited workspace
 
     --- Apps
-        , ("M-c", spawn "alacritty --class ranger -e ranger")
+        , ("M-S-y", spawn "ytfzf -D")
+        , ("M-e", spawn "emacsclient -c -a '' --eval '(dired nil)'")
 
     --- Scratchpads
         , ("M-v", namedScratchpadAction myScratchPads "ncmpcpp")
@@ -257,11 +257,9 @@ myManageHook = composeAll
         className =? "XCalc"        --> doFloat
       , className =? "mpv"          --> doShift "vid"
       , className =? "qutebrowser"  --> doShift "www"
-      , className =? "librewolf"    --> doShift "www"
-      , className =? "code"         --> doShift "dev"
+      , className =? "librewolf-default"    --> doShift "www"
       , className =? "apadoc"       --> doShift "doc"
-      , className =? "MuPDF"        --> doShift "doc"
-      , className =? "rangerqute"   --> doFloat
+      -- , className =? "MuPDF"        --> doShift "doc"
      ] <+> namedScratchpadManageHook myScratchPads
 
 ------------------------------------------------------------------------
@@ -279,10 +277,11 @@ space      = renamed [Replace "space"]    $ limitWindows 4  $ spacingRaw True (B
 floats     = renamed [Replace "floats"]   $ limitWindows 20 $ simplestFloat
 
 
+myScratchPads :: [NamedScratchpad]
 myScratchPads = [
         NS "ncmpcpp" (myTerminal ++ " --class ncmpcpp -e ncmpcpp") (resource =? "ncmpcpp")
          (customFloating $ W.RationalRect (0.05) (0.05) (0.9) (0.9))
-      , NS "emacs" ("emacsclient -c -a \"emacs\"") (resource =? "emacs")
+      , NS "emacs" ("emacsclient -c -a \"\"") (resource =? "emacs")
          (customFloating $ W.RationalRect (0.05) (0.05) (0.9) (0.9))
       , NS "scratchpad" (myTerminal ++ " --class scratchpad") (resource =? "scratchpad")
          (customFloating $ W.RationalRect (0.05) (0.05) (0.9) (0.9))
