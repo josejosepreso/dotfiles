@@ -4,3 +4,6 @@ runtime! debian.vim
 " Automatically compile .tex file "
 autocmd BufWritePost main.tex !pdflatex main.tex; pkill -HUP mupdf
 
+" Automatically compile config.h file "
+autocmd BufWritePost config.h !sudo make clean install
+
