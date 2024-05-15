@@ -1,5 +1,10 @@
-defaults.pcm.card 1
-defaults.ctl.card 1
+# PC
+#defaults.pcm.card 1
+#defaults.ctl.card 1
+
+# USB PnP Sound Device
+defaults.pcm.card 2
+defaults.ctl.card 2
 
 ctl.equal {
     type equal;
