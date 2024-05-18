@@ -78,6 +78,11 @@ static const char *mutevol[]    = { "/usr/bin/amixer", "set", "Master", "toggle"
 //static const char *mutevol[]    = { "/usr/bin/amixer", "set", "PCM", "toggle", NULL };
 static const char *updtbar[]    = { "/home/jose/scripts/updtbar", NULL};
 
+/* media keys */
+static const char *moctogg[] = { "mocp", "-G", NULL };
+static const char *mocnext[] = { "mocp", "-f", NULL };
+static const char *mocprev[] = { "mocp", "-r", NULL };
+
 /* screenshot  */
 static const char *screenshot[] = {"scrot", "/home/jose/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png", NULL};
 
@@ -111,9 +116,12 @@ static const Key keys[] = {
 	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = updtbar   } },
 
 	/* Media keys */
-	//{ 0, XF86XK_AudioPlay, spawn, {.v = mpctogg } },
-	//{ 0, XF86XK_AudioNext, spawn, {.v = mpcnext } },
-	//{ 0, XF86XK_AudioPrev, spawn, {.v = mpcprev } },
+	{ 0, XF86XK_AudioPlay, spawn, {.v = moctogg } },
+	{ 0, XF86XK_AudioPlay, spawn, {.v = updtbar } },
+	{ 0, XF86XK_AudioNext, spawn, {.v = mocnext } },
+	{ 0, XF86XK_AudioNext, spawn, {.v = updtbar } },
+	{ 0, XF86XK_AudioPrev, spawn, {.v = mocprev } },
+	{ 0, XF86XK_AudioPrev, spawn, {.v = updtbar } },
 
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },

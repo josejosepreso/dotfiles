@@ -1,7 +1,7 @@
 xrdb ~/.Xresources
 # xmodmap ~/.Xmodmap
 ~/.fehbg
-
+# emacs --daemon
 while true; do
 	
 	DATE=$(date '+%Y %b %d (%a) %I:%M%p')
@@ -9,6 +9,11 @@ while true; do
 	TEMP=$(sensors | awk '/^temp1/ {print $2}' | awk NR==1)
 	DISK=$(df -h | awk '/^\/dev\/sda3/ {print $3 "/" $2 " ("$5")"}')
 	
+	SONG="..."
+	[ "$(mocp -Q %title)" ] && SONG=$(mocp -Q '%song - %artist' | cut -c -40) 
+	SSTATE=""
+	[ "$(mocp -Q %state)" ] && SSTATE=$(mocp -Q %state | sed "s/PLAY/\ /;s/PAUSE/\ /")
+
 	UPDT="0"
 	# UPDT=$(checkupdates | wc -l &)
 	
@@ -20,10 +25,8 @@ while true; do
 	BATTSTAT=""
 	[ "$(cat /sys/class/power_supply/BAT1/status)" = "Charging" ] && BATTSTAT=" ^"
 
-	xsetroot -name "󰇚 $UPDT | $ICON $VOL | 󰨣 $DISK |  $TEMP |  $MEM |  $DATE |  $BATT%$BATTSTAT"
+	xsetroot -name "󰇚 $UPDT | $ICON $VOL | $SSTATE$SONG |  $TEMP |  $MEM |  $DATE |  $BATT%$BATTSTAT"
 
 	sleep 60
 done &
-
-emacs --daemon
 exec dwm
