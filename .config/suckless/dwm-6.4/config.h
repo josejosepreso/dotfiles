@@ -6,16 +6,17 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 //static const char *fonts[]          = { "monospace:size=10" ,"0xProto Nerd Font Mono:size=14" };
-static const char *fonts[]          = { "Iosevka:size=10" ,"0xProto Nerd Font Mono:size=14" };
-static const char dmenufont[]       = "Iosevka:size=10";
-/*
-static const char col_gray1[]       = "#2C0011";
-static const char col_gray2[]       = "#47001B";
-static const char col_gray3[]       = "#ff0070";
-static const char col_gray4[]       = "#2C0011";
-static const char col_cyan[]        = "#ff0070";
-*/
-static const char col_gray1[]       = "#222222";
+static const char *fonts[]          = { "Iosevka:style=Bold:size=9" ,"0xProto Nerd Font Mono:size=12" };
+static const char dmenufont[]       = "Iosevka:style=Bold:size=9";
+
+
+//static const char col_gray1[]       = "#2C0011";
+//static const char col_gray2[]       = "#47001B";
+//static const char col_gray3[]       = "#ff0070";
+//static const char col_gray4[]       = "#2C0011";
+//static const char col_cyan[]        = "#ff0070";
+
+static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
@@ -28,8 +29,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "󰈙", "", "", "󰋩", "", "", "" };
-// static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "󰈙", "", "", "", "", "", "" };
+//static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
@@ -65,7 +66,6 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "qutebrowser",  NULL,       NULL,       1 << 8,	    0,           -1 },
 	{ "mpv",  NULL,       NULL,       1 << 7,	    0,           -1 },
-	{ "mocp",     NULL,       NULL,       0,            1            -1}
 };
 
 /* volume */
@@ -73,44 +73,47 @@ static const Rule rules[] = {
 static const char *upvol[]      = { "/usr/bin/amixer",  "set", "Master", "5%+", NULL };
 static const char *downvol[]    = { "/usr/bin/amixer",  "set", "Master", "5%-", NULL };
 static const char *mutevol[]    = { "/usr/bin/amixer", "set", "Master", "toggle", NULL };
-
-/* Control Media Players */
-static const char *medplaypausecmd[] = { "mocp", "--toggle-pause", NULL };
-static const char *mednextcmd[] = { "mocp", "--next", NULL };
-static const char *medprevcmd[] = { "mocp", "--previous", NULL };
+//static const char *upvol[]      = { "/usr/bin/amixer",  "set", "PCM", "5%+", NULL };
+//static const char *downvol[]    = { "/usr/bin/amixer",  "set", "PCM", "5%-", NULL };
+//static const char *mutevol[]    = { "/usr/bin/amixer", "set", "PCM", "toggle", NULL };
+static const char *updtbar[]    = { "/home/jose/scripts/updtbar", NULL};
 
 /* screenshot  */
 static const char *screenshot[] = {"scrot", "/home/jose/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png", NULL};
 
-/* ncmpcpp  */
-static const char *ncmpcpp[] = {"urxvt", "-c", "mocp", "-e", "mocp", NULL};
+/* emacs  */
+static const char *emacs[] = {"urxvt", "-e", "emacsclient" , "-c", "-a", "''", NULL};
 
-/* file manager */
-static const char *ranger[] = {"urxvt", "-e", "ranger", NULL};
+/* */
+static const char *mplay[] = {"mplay", NULL};
+static const char *ytfzf[] = {"ytfzf", "-D", NULL};
 
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
 
 static const Key keys[] = {
 
+	{ MODKEY|ShiftMask,             XK_m,     spawn, {.v = mplay } },
+	{ MODKEY|ShiftMask,             XK_y,     spawn, {.v = ytfzf } },
+	
 	/* moc */
-	{ MODKEY,                       XK_c,     spawn, {.v = ncmpcpp } },
-
-	/* nnn */
-	{ MODKEY,                       XK_v,     spawn, {.v = ranger } },
+	{ MODKEY,                       XK_c,     spawn, {.v = emacs } },
 
 	/* ss, PrtSc button */
 	{ 0,				XK_Print, spawn, {.v = screenshot } },
 
 	/* volume  */
 	{ 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+	{ 0,                       XF86XK_AudioLowerVolume, spawn, {.v = updtbar } },
 	{ 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
+	{ 0,                       XF86XK_AudioMute, spawn, {.v = updtbar } },
 	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = updtbar   } },
 
 	/* Media keys */
-	{ 0, XF86XK_AudioPlay, spawn, {.v = medplaypausecmd } },
-	{ 0, XF86XK_AudioNext, spawn, {.v = mednextcmd } },
-	{ 0, XF86XK_AudioPrev, spawn, {.v = medprevcmd } },
+	//{ 0, XF86XK_AudioPlay, spawn, {.v = mpctogg } },
+	//{ 0, XF86XK_AudioNext, spawn, {.v = mpcnext } },
+	//{ 0, XF86XK_AudioPrev, spawn, {.v = mpcprev } },
 
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -118,8 +121,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	//{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+	//{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },

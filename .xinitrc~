@@ -1,6 +1,29 @@
+xrdb ~/.Xresources
+# xmodmap ~/.Xmodmap
 ~/.fehbg
-picom &
-emacs --daemon &
 
-# exec emacs
-exec xmonad
+while true; do
+	
+	DATE=$(date '+%Y %b %d (%a) %I:%M%p')
+	MEM=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
+	TEMP=$(sensors | awk '/^temp1/ {print $2}' | awk NR==1)
+	DISK=$(df -h | awk '/^\/dev\/sda3/ {print $3 "/" $2 " ("$5")"}')
+	
+	UPDT="0"
+	# UPDT=$(checkupdates | wc -l &)
+	
+	VOL=$(amixer get Master | grep -o "[0-9]*%")
+	ICON=""
+	[ "$(amixer get Master | grep -o '\[on\]\|\[off\]')" = "[on]" ] && ICON=""
+	
+	BATT=$(cat /sys/class/power_supply/BAT1/capacity)
+	BATTSTAT=""
+	[ "$(cat /sys/class/power_supply/BAT1/status)" = "Charging" ] && BATTSTAT=" ^"
+
+	xsetroot -name "󰇚 $UPDT | $ICON $VOL | 󰨣 $DISK |  $TEMP |  $MEM |  $DATE |  $BATT%$BATTSTAT"
+
+	sleep 60
+done &
+
+emacs --daemon
+exec dwm
