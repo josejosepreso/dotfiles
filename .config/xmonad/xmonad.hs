@@ -80,7 +80,6 @@ main :: IO ()
 main = do
     -- Launching xmobar.
     xmproc <- spawnPipe "xmobar $HOME/.config/xmobar/xmobar.hs"
-        -- the xmonad, ya know...what the WM is named after!
     xmonad $ ewmh desktopConfig
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageHook desktopConfig <+> manageDocks
         , logHook = dynamicLogWithPP xmobarPP
@@ -104,6 +103,9 @@ main = do
         , focusedBorderColor = "#bbc5ff"
         , startupHook = do
                   setDefaultCursor xC_left_ptr
+                  spawnOnce "~/.fehbg &"
+                  spawnOnce "picom"
+                  spawn "usr/bin/emacs --daemon"
         } `additionalKeysP`         myKeys
 
        
@@ -182,7 +184,7 @@ myKeys =
         , ("M-<Delete>", withFocused $ windows . W.sink)  -- Push floating window back to tile.
         , ("M-S-<Delete>", sinkAll)                  -- Push ALL floating windows back to tile.
 
-
+    --- Go to workspace prompt
         , ("M-S-g", goToSelected $ mygridConfig myColorizer)
         , ("M-S-b", bringSelected $ mygridConfig myColorizer)
 
@@ -199,46 +201,40 @@ myKeys =
         
         , ("M-C-M1-<Up>", sendMessage Arrange)
         , ("M-C-M1-<Down>", sendMessage DeArrange)
-   --     , ("M-<Up>", sendMessage (MoveUp 10))             --  Move focused window to up
-   --     , ("M-<Down>", sendMessage (MoveDown 10))         --  Move focused window to down
-   --     , ("M-<Right>", sendMessage (MoveRight 10))       --  Move focused window to right
-   --     , ("M-<Left>", sendMessage (MoveLeft 10))         --  Move focused window to left
-   --     , ("M-S-<Up>", sendMessage (IncreaseUp 10))       --  Increase size of focused window up
-   --     , ("M-S-<Down>", sendMessage (IncreaseDown 10))   --  Increase size of focused window down
-   --     , ("M-S-<Right>", sendMessage (IncreaseRight 10)) --  Increase size of focused window right
-   --     , ("M-S-<Left>", sendMessage (IncreaseLeft 10))   --  Increase size of focused window left
-   --     , ("M-C-<Up>", sendMessage (DecreaseUp 10))       --  Decrease size of focused window up
-   --     , ("M-C-<Down>", sendMessage (DecreaseDown 10))   --  Decrease size of focused window down
-   --     , ("M-C-<Right>", sendMessage (DecreaseRight 10)) --  Decrease size of focused window right
-   --     , ("M-C-<Left>", sendMessage (DecreaseLeft 10))   --  Decrease size of focused window left
+        , ("M-<Up>", sendMessage (MoveUp 10))             --  Move focused window to up
+        , ("M-<Down>", sendMessage (MoveDown 10))         --  Move focused window to down
+        , ("M-<Right>", sendMessage (MoveRight 10))       --  Move focused window to right
+        , ("M-<Left>", sendMessage (MoveLeft 10))         --  Move focused window to left
+        , ("M-S-<Up>", sendMessage (IncreaseUp 10))       --  Increase size of focused window up
+        , ("M-S-<Down>", sendMessage (IncreaseDown 10))   --  Increase size of focused window down
+        , ("M-S-<Right>", sendMessage (IncreaseRight 10)) --  Increase size of focused window right
+        , ("M-S-<Left>", sendMessage (IncreaseLeft 10))   --  Increase size of focused window left
+        , ("M-C-<Up>", sendMessage (DecreaseUp 10))       --  Decrease size of focused window up
+        , ("M-C-<Down>", sendMessage (DecreaseDown 10))   --  Decrease size of focused window down
+        , ("M-C-<Right>", sendMessage (DecreaseRight 10)) --  Decrease size of focused window right
+        , ("M-C-<Left>", sendMessage (DecreaseLeft 10))   --  Decrease size of focused window left
 
     --- Layouts
         , ("M-<Space>", sendMessage NextLayout)                              -- Switch to next layout
-	, ("M-S-<Space>", sendMessage ToggleStruts)                          -- Toggles struts
-	, ("M-S-n", sendMessage $ Toggle NOBORDERS)                          -- Toggles noborder
-	, ("M-S-=", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts) -- Toggles noborder/full
-	, ("M-S-f", sendMessage (T.Toggle "float"))
-	, ("M-S-x", sendMessage $ Toggle REFLECTX)
-	--, ("M-S-y", sendMessage $ Toggle REFLECTY)
-	, ("M-<KP_Multiply>", sendMessage (IncMasterN 1))   -- Increase number of clients in the master pane
-	, ("M-<KP_Divide>", sendMessage (IncMasterN (-1)))  -- Decrease number of clients in the master pane
-	, ("M-S-<KP_Multiply>", increaseLimit)              -- Increase number of windows that can be shown
-	, ("M-S-<KP_Divide>", decreaseLimit)                -- Decrease number of windows that can be shown
+	    , ("M-S-<Space>", sendMessage ToggleStruts)                          -- Toggles struts
+	    , ("M-S-=", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts) -- Toggles noborder/full
 
-	, ("M-C-h", sendMessage Shrink)
-	, ("M-C-l", sendMessage Expand)
-	, ("M-C-j", sendMessage MirrorShrink)
-	, ("M-C-k", sendMessage MirrorExpand)
-	, ("M-S-;", sendMessage zoomReset)
-	, ("M-;", sendMessage ZoomFullToggle)
+	    , ("M-C-h", sendMessage Shrink)
+	    , ("M-C-l", sendMessage Expand)
+	    , ("M-C-j", sendMessage MirrorShrink)
+	    , ("M-C-k", sendMessage MirrorExpand)
+	    , ("M-S-;", sendMessage zoomReset)
+	    , ("M-;", sendMessage ZoomFullToggle)
 
 	--- Workspaces
-        , ("M-S-<KP_Subtract>", shiftTo Prev nonNSP >> moveTo Prev nonNSP)  -- Shifts focused window to previous workspace
         , ("M-<Tab>", CWS.toggleWS)                        -- Go to last visited workspace
 
-    --- Apps
-        , ("M-S-y", spawn "ytfzf -D")
-        , ("M-e", spawn "emacsclient -c -a '' --eval '(dired nil)'")
+    --- Cycle through non empty workspaces
+        , ("M-S-l", moveTo Next (Not CWS.emptyWS))
+        , ("M-S-h", moveTo Prev (Not CWS.emptyWS))
+
+    --- ranger
+        , ("M-c", spawn "alacritty -e ranger")
 
     --- Scratchpads
         , ("M-v", namedScratchpadAction myScratchPads "ncmpcpp")
@@ -283,6 +279,7 @@ myScratchPads = [
          (customFloating $ W.RationalRect (0.05) (0.05) (0.9) (0.9))
       , NS "emacs" ("emacsclient -c -a \"\"") (resource =? "emacs")
          (customFloating $ W.RationalRect (0.05) (0.05) (0.9) (0.9))
+         --(nonFloating)
       , NS "scratchpad" (myTerminal ++ " --class scratchpad") (resource =? "scratchpad")
          (customFloating $ W.RationalRect (0.05) (0.05) (0.9) (0.9))
  ]
