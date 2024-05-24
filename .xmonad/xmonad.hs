@@ -3,20 +3,18 @@ import XMonad.Config.Desktop
 import XMonad.Util.EZConfig
 import qualified XMonad.Actions.CycleWS as CWS -- Last visited workspace
 import qualified XMonad.StackSet as W          -- Set master
-import XMonad.Layout.Spacing                   -- Window spacing
 import XMonad.Actions.CycleWS                  -- Cycle through workspaces
 import XMonad.Actions.GridSelect               -- Grid prompt
 
 baseConfig = desktopConfig {
                modMask = mod4Mask
-             , focusedBorderColor = "#bbc5ff"
-             , borderWidth        = 2
+             -- , focusedBorderColor = "#bbc5ff"
+             , borderWidth        = 1
             }
 
 main :: IO ()
 main = xmonad $ baseConfig {
                   startupHook = startupHook baseConfig <+> idHook
-                , layoutHook = spacingWithEdge 3 $ layoutHook baseConfig
                }
                 `additionalKeysP` myKeys
 
@@ -41,7 +39,8 @@ myKeys = [
                , ("M-w", kill)
                
                  ---
-               , ("M-c", spawn "urxvt -e mocp")
+               -- , ("M-c", spawn "urxvt -e mocp")
+               , ("M-c", spawn "urxvt -e ncmpcpp")
                , ("M-v", spawn "urxvt -e ranger")
                , ("M-m", spawn "mplay")
                , ("M-e", spawn "emacsclient -c -a ''")
