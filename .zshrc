@@ -55,8 +55,11 @@ alias mp3='yt-dlp -x --audio-format mp3 --audio-quality 0 $@'
 # alias ls='ls -al --color=always'
 alias ls='ls --color=always -a'
 alias grep='grep --color=auto'
+alias dot='git clone https://github.com/josejosepreso/dotfiles'
+alias mpvf='mpv --vd-lavc-skipframe=bidir'
 
 export EDITOR='vim'
+export PATH=$PATH:/home/jose/.cargo/bin
 export PATH=$PATH:/home/jose/scripts
 export PATH=$PATH:/home/jose/.local/bin
 
