@@ -11,7 +11,7 @@ import XMonad.Hooks.WindowSwallowing
 baseConfig = desktopConfig {
                modMask = mod4Mask
              , focusedBorderColor = "#bbc5ff"
-             , borderWidth        = 1
+             , borderWidth        = 2
             }
 
 main :: IO ()
