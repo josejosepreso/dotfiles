@@ -1,0 +1,9 @@
+SoundDriver = ALSA
+
+# Keymap = keymap
+Theme = darkdot_theme
+PlaylistFullPaths = no
+ReadTags = no
+ShowFormat = no
+ShowTime = no
+TagsCacheSize = 0

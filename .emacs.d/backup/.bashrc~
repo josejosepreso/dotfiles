@@ -1,0 +1,20 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export EDITOR='vim'
+export PATH=$PATH:/home/jose/scripts
+export PATH=$PATH:/home/jose/.local/bin
+
+alias mp3='yt-dlp -x --audio-format mp3 --audio-quality 0 $@'
+alias ls='ls -al --color=always'
+alias grep='grep --color=auto'
+
+alias fastfetch='fastfetch --cpu-temp'
+fastfetch
+# neofetch
+
+alias pkglist='pacman -Qqe | grep -v base'

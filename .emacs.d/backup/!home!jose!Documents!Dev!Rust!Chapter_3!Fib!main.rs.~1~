@@ -1,0 +1,56 @@
+use std::io;
+
+fn main() {
+
+    let mut n = String::new();
+
+    println!("Enter a positive integer:");
+    io::stdin().read_line(&mut n).expect("");
+    println!("\n");
+
+    let n: u32 = n.trim().parse().expect("");
+    
+    let str: String = fib_seq(n);
+    println!("{}", str);
+
+    let f: u32 = fibonacci(n);
+    println!("{}", f);
+}
+
+fn fibonacci(x: u32) -> u32 {
+
+    match x {
+
+        1|2 => 1,
+        _ => fibonacci(x - 1) + fibonacci(x - 2),
+    }
+}
+
+fn fib(x: u32) -> u32 {
+
+    if x == 1 || x == 2 {
+
+        return 1;
+    }
+
+    fib(x - 1) + fib(x - 2)
+}
+
+fn fib_seq(x: u32) -> String {
+
+    let mut result = String::new();
+    let mut i = 1;
+
+    loop {
+
+        result += &fib(i).to_string();
+        result += "\n";
+
+        if i == x {
+
+            break result
+        }
+
+        i += 1;
+    }
+}

@@ -1,0 +1,4 @@
+;;;; -*- mode: lisp-data -*-
+(
+ (:id "sha1:85b31c268009209a8d3c5387033b219264f7e62b" :fingerprints ("sha1:a2:04:ef:4e:fe:98:bf:12:58:e5:75:49:72:85:4e:b1:00:ab:7d:18") :host "melpa.org:443" :conditions (:revocation-data-superseded :invalid :verify-cert))
+)

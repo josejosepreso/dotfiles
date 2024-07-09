@@ -1,0 +1,29 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/jose/Documents/" . "Dev/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/jose/Documents/Dev/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "php.org"
+ "php"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/jose/Documents/Dev/" (26181 36916 665587 49000) ".#php.org" "Haskell/" "./" "../" "circuitoK/" "php.org")
+
+ ("/home/jose/Documents/" (26181 29031 268419 218000) "LaTeX/" "./" "../" "Dev/" "#vim#" ".alsaequal.bin" "sudoers.lecture")
+
+ ("/home/jose/" (26181 36560 328897 739000) ".moonchild productions/" ".viminfo" ".lesshst" ".Xresources" "Documents/" ".fltk/" "watch/" ".dosbox/" ".local/" ".bash_history-18407.tmp" ".bash_history-00438.tmp" "./" ".bash_profile" ".asoundrc" ".bash_history-00484.tmp" ".config/" ".cache/" "../" ".bash_history-00425.tmp" "repos/" ".emacs.d/" "anon.session" "session/" ".pki/" ".python_history" ".alsaequal.bin" ".vimrc" ".bash_history-00442.tmp" ".gnupg/" ".bash_logout" ".bash_history-00435.tmp" ".xinitrc~" ".bashrc" "scripts/" ".bashrc~" ".rtorrent.rc" ".Xresources~" ".newsboat/" ".fehbg" ".vim/" ".bash_history" ".ssh/" ".xinitrc" "Music/" ".Xauthority" "Pictures/" "Videos/" ".gitconfig" ".wget-hsts" ".Xmodmap" "Downloads/" ".elfeed/")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

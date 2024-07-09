@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+class Program {
+
+    public static void main(String[] args) {
+
+	System.out.println(String.format("%s", Menu.text()));
+
+	Scanner scanner = new Scanner(System.in);
+	System.out.println("n1:");
+	String n1 = scanner.nextLine();
+	System.out.println("n2:");
+	String n2 = scanner.nextLine();
+	System.out.println("op:");
+	String op = scanner.nextLine();
+
+	int x = Integer.parseInt(n1);
+	int y = Integer.parseInt(n2);
+	int w = Integer.parseInt(op);
+
+	Operation operation = new Operation(x, y, w);
+	operation.setResult();
+	System.out.println(String.format("%s", operation.getResult()));
+    }
+}
+
+public class Menu {
+
+    public static String text() {
+
+	return "Operaciones basicas:\n1. Suma\n2. Resta\n3. Multiplicacion\n4. Division\n";
+    }
+}
+
+public class Operation {
+    
+    private int n1;
+    private int n2;
+    private int op;
+    private int result;
+    
+    public Operation(int n1, int n2, int op) {
+	
+	this.n1 = n1;
+	this.n2 = n2;
+	this.op = op;
+    }
+    
+    public void setResult() {
+	
+	if (this.op == 1) this.result = this.n1 + this.n2;
+	else if(this.op == 2) this.result = this.n1 - this.n2;
+	else if(this.op == 3) this.result = this.n1 * this.n2;
+	else if(this.op == 4) this.result = this.n1 / this.n2;
+    }
+    
+    public int getResult() {
+	
+	return this.result;
+    }
+}

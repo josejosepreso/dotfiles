@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+class Program {
+
+    public static void main(String[] args) {
+
+	int n1, n2, op;
+	Scanner scanner = new Scanner(System.in);
+	Operation operation = new Operation();
+    }
+
+    public class Operation() {
+
+	private int n1;
+	private int n2;
+	private int op;
+	private int result;
+
+	public Operation(int n1, int n2, int op) {
+
+	    this.n1 = n1;
+	    this.n2 = n2;
+	    this.op = op;
+	}
+
+	public void setResult() {
+
+	    if (this.op == 1) this.result = n1 + n2;
+	    else if(this.op == 2) this.result = n1 - n2;
+	    else if(this.op == 3) this.result = n1 * n2;
+	    else if(this.op == 4) this.result = n1 / n2;
+	}
+
+	public int getResult() {
+
+	    return this.result;
+	}
+    }
+}
