@@ -1,9 +1,0 @@
-SoundDriver = ALSA
-
-# Keymap = keymap
-Theme = planets_theme
-PlaylistFullPaths = no
-ReadTags = no
-ShowFormat = no
-ShowTime = no
-TagsCacheSize = 0
