@@ -155,8 +155,8 @@ c.url.searchengines={
         "aw": "https://wiki.archlinux.org/?search={}"
 }
 
-# config.bind('I', 'set content.images true')
-# config.bind('Z', 'set content.images false')
-# config.bind('J', 'hint links spawn --detach mpv --ytdl-format=18 {hint-url}')
-config.bind('J', 'hint links spawn --detach mpv {hint-url} --pause')
-config.bind('I', 'spawn --userscript qute-pass')
+config.bind('I', 'set content.images true')
+config.bind('Z', 'set content.images false')
+config.bind('J', 'hint links spawn --detach mpv --ytdl-format=18 {hint-url}')
+# config.bind('J', 'hint links spawn --detach mpv {hint-url} --pause')
+# config.bind('I', 'spawn --userscript qute-pass')
