@@ -1,3 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/sh
 
-lynx --dump https://verlooneytunesshow.blogspot.com/p/temporada-1.html | grep '.com/20' | sed 's/\ *[0-9]\+\.\ //g' | dmenu -l 30 | xargs -d '\n' mpv
+curl -s https://verlooneytunesshow.blogspot.com/p/temporada-1.html | grep -o "http://verlooneytunesshow.blogspot.com/201.*\.html" | dmenu -i -l 30 | xargs mpv
+
