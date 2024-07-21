@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+find ~/Music/ | dmenu -i -l 30 | xargs -d '\n' mpv --force-window=yes --no-audio-display

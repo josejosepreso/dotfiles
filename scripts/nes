@@ -1,3 +1,0 @@
-#!/usr/bin/sh
-
-find /home/jose/Downloads/Nintendo | dmenu -i -l 30 | xargs -d '\n' -r nestopia -f
