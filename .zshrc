@@ -46,17 +46,16 @@ bindkey -M visual '^[[P' vi-delete
 alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
-	rm="rm -vI" \
 	bc="bc -ql" \
 	rsync="rsync -vrPlu" \
 	mkd="mkdir -pv" \
 alias pkglist='pacman -Qqe | grep -v base'
 alias mp3='yt-dlp -x --audio-format mp3 --audio-quality 0 $@'
-# alias ls='ls -al --color=always'
-alias ls='ls --color=always -a'
+alias ls='ls --color=always -la'
 alias grep='grep --color=auto'
-alias dot='git clone https://github.com/josejosepreso/dotfiles'
 alias mpvf='mpv --vd-lavc-skipframe=bidir'
+# alias screenrec='ffmpeg -video_size 1366x768 -framerate 25 -f x11grab -i :0.0 -c:v ffvhuff output.mkv'
+alias screenrec='ffmpeg -video_size 1366x768 -framerate 25 -f x11grab -i :0.0 output.mkv'
 
 export EDITOR='vim'
 export PATH=$PATH:/home/jose/.cargo/bin
@@ -64,3 +63,5 @@ export PATH=$PATH:/home/jose/scripts
 export PATH=$PATH:/home/jose/.local/bin
 
 fastfetch --cpu-temp
+
+# eval "$(starship init zsh)"
