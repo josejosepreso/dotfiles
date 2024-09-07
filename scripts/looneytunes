@@ -1,4 +1,7 @@
 #!/usr/bin/sh
 
-curl -s https://verlooneytunesshow.blogspot.com/p/temporada-1.html | grep -o "http://verlooneytunesshow.blogspot.com/201.*\.html" | dmenu -i -l 30 | xargs mpv
+curl -s https://verlooneytunesshow.blogspot.com/p/temporada-1.html \
+	| grep -o "http://verlooneytunesshow.blogspot.com/201.*\.html" \
+	| dmenu -i -l 30 \
+	| xargs mpv
 
