@@ -18,10 +18,6 @@ while read -r line ; do
 			temp="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
 			;;
 
-		M*)	# memory output 
-			mem="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
-			;;
-
 		S*)
 			# clock output
 			sys="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
@@ -128,5 +124,5 @@ while read -r line ; do
 			done
 			;;
 	esac
-	printf "%s\n" "%{l}${wm}%{c}${title}%{r}${temp} | ${mem} | ${sys} | ${batt}"
+	printf "%s\n" "%{l}${wm}%{c}${title}%{r}${temp} | ${sys} | ${batt}"
 done
