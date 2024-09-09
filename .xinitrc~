@@ -1,7 +1,6 @@
 xrdb ~/.Xresources
 # xmodmap ~/.Xmodmap
 ~/.fehbg
-# emacs --daemon
 
 dwmbar
 exec dwm
