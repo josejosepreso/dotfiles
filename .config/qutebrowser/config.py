@@ -1,3 +1,5 @@
+config.load_autoconfig()
+
 c.auto_save.session = True
 c.content.images = False
 
@@ -39,3 +41,6 @@ c.url.searchengines={
 config.bind('I', 'set content.images true')
 config.bind('Z', 'set content.images false')
 config.bind('J', 'hint links spawn --detach mpv --ytdl-format=18 {hint-url}')
+
+with config.pattern('*://play.pokemonshowdown.com/*') as p:
+    p.content.images = True
