@@ -1,8 +1,14 @@
 #!/usr/bin/sh
 
+# curl -s https://pokemon-project.com/episodios/latino/serie-ash/temporada-6 \
+#       | grep -o "https://pokemon-project.com/episodios/latino/serie-ash/temporada-6/episodio-.*[0-9]\">" \
+#       | sed 's/\">//' \
+#	| sort -u --version-sort \
+#	| dmenu -l 30 \
+#	| xargs mpv
+
 curl -s https://pokemon-project.com/episodios/latino/serie-ash/temporada-6 \
-       	| grep -o "https://pokemon-project.com/episodios/latino/serie-ash/temporada-6/episodio-.*[0-9]\">" \
-       	| sed 's/\">//' \
-	| sort -u --version-sort \
-	| dmenu -l 30 \
-	| xargs mpv
+        | grep -o "https://pokemon-project.com/episodios/latino/serie-ash/temporada-6/episodio-.*[0-9]\">" \
+        | sed 's/\">//' \
+        | sort -u --version-sort \
+        | fzf --bind enter:execute'(powershell.exe mpv {})'\
