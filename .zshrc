@@ -1,5 +1,7 @@
 # Enable colors and change prompt:
-PS1="[%n@%M %~]\$ "
+# PS1="[%n@%M %~]\$ "
+autoload -U colors && colors	# Load colors
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
 # History in cache directory:
 HISTSIZE=10000000
@@ -51,17 +53,22 @@ alias \
 	mkd="mkdir -pv" \
 alias pkglist='pacman -Qqe | grep -v base'
 alias mp3='yt-dlp -x --audio-format mp3 --audio-quality 0 $@'
-alias ls='ls --color=always -la'
+alias ls='eza -al --color=always --group-directories-first'
 alias grep='grep --color=auto'
 alias mpvf='mpv --vd-lavc-skipframe=bidir'
 # alias screenrec='ffmpeg -video_size 1366x768 -framerate 25 -f x11grab -i :0.0 -c:v ffvhuff output.mkv'
 alias screenrec='ffmpeg -video_size 1366x768 -framerate 25 -f x11grab -i :0.0 output.mkv'
+alias cdf='cd $(cat ~/.dmks | fzf)'
+alias dmk='pwd >> ~/.dmks'
+alias sudo='doas'
+alias mpc='mpc --host 192.168.0.8'
+alias ympd='ympd -h 192.168.0.8'
 
+export VISUAL='vim'
 export EDITOR='vim'
 export PATH=$PATH:/home/jose/.cargo/bin
 export PATH=$PATH:/home/jose/scripts
 export PATH=$PATH:/home/jose/.local/bin
+export PATH=$PATH:/home/jose/.config/bspwm
 
 fastfetch --cpu-temp
-
-# eval "$(starship init zsh)"
