@@ -53,7 +53,7 @@ window#waybar {
 	color: #b58900;
 }
 #temperature {
-        color: #3198ff;
+        color: #3198;
 }
 
 #temperature,

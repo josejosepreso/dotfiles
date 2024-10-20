@@ -11,7 +11,7 @@ $menu = tofi-run | xargs hyprctl dispatch exec
 
 # 
 exec-once = waybar
-exec-once = swaybg -m fill -i /home/jose/Pictures/xfce-shapes.svg
+exec-once = swaybg -m fill -i /home/jose/Pictures/wallhaven-rrljjq.jpg
 
 #
 env = XCURSOR_SIZE,24
@@ -195,4 +195,8 @@ windowrulev2 = suppressevent maximize, class:.*
 # Fix some dragging issues with XWayland
 windowrulev2 = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
 
-windowrulev2 = noanim,floating:1
+# windowrulev2 = noanim,floating:1
+
+misc {
+     animate_mouse_windowdragging = false
+}
