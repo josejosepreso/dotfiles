@@ -33,6 +33,10 @@
 		"custom/left-arrow-dark",
 		"battery"
 	],
+	
+	"hyprland/window": {
+		"max-length": 40
+	},
 
 	"custom/left-arrow-dark": {
 		"format": "",
@@ -71,7 +75,8 @@
 	"temperature": {
 	       "interval": 10,
 	       "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-	       "format": "Temp {temperatureC} °C"
+	       "format": "Temp {temperatureC} °C",
+	       "tooltip": false
 	},
 	"cpu": {
 		"interval": 10,

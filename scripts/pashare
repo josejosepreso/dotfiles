@@ -11,5 +11,3 @@ case "$1" in
     echo "Usage: $0 start|stop" >&2
     ;;
 esac
-
-# https://superuser.com/questions/605445/how-to-stream-my-gnu-linux-audio-output-to-android-devices-over-wi-fi
