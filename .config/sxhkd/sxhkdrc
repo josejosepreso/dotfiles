@@ -36,8 +36,8 @@ super + y
 	bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest window
-super + g
-	bspc node -s biggest.window
+# super + g
+# 	bspc node -s biggest.window
 
 #
 # state/flags
@@ -50,6 +50,10 @@ super + {t,shift + t,s,f}
 # set the node flags
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
+
+# Rotate the tree from the current nodes parent
+super + {d, shift + d}
+	bspc node @parent --rotate {90,270}
 
 #
 # focus/swap
@@ -121,6 +125,10 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+# brightness
+{XF86MonBrightnessUp, XF86MonBrightnessDown}
+	brightnessctl set {+3%, 3%-}
+
 #
 # media
 #
@@ -131,7 +139,8 @@ super + {Left,Down,Up,Right}
 
 # take screenshot
 Print
-	scrot /home/jose/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png
+	flameshot gui
+	#scrot /home/jose/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png
 
 # ytf
 super + shift + y
@@ -140,3 +149,12 @@ super + shift + y
 # music
 super + shift + m
 	mplay
+
+super + e
+      emacs
+
+super + v
+      	urxvt -e ranger
+
+super + n
+	python /home/jose/Documents/Programming/ETL/main.py
