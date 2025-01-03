@@ -1,0 +1,26 @@
+defaults.pcm.card 1
+defaults.ctl.card 1
+
+ctl.equal {
+    type equal;
+}
+
+pcm.plugequal {
+    type equal;
+    # Normally, the equalizer feeds into dmix so that audio
+    # from multiple applications can be played simultaneously:
+    slave.pcm "plug:dmix";
+    # If you want to feed directly into a device, specify it instead of dmix:
+    # slave.pcm "plughw:1,1";
+}
+
+# Configuring pcm.!default will make the equalizer your default sink
+pcm.!default {
+# If you do not want the equalizer to be your default,
+# give it a different name, like pcm.equal commented below
+# Then you can choose it as the output device by addressing
+# it in individual apps, for example mpg123 -a equal 06.Back_In_Black.mp3
+# pcm.equal {
+    type plug;
+    slave.pcm plugequal;
+}

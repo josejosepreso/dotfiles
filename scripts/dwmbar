@@ -1,0 +1,35 @@
+#!/usr/bin/sh
+
+#      |                     
+#   _` |\ \  \   / __ `__ \  
+#  (   | \ \  \ /  |   |   | 
+# \__,_|  \_/\_/  _|  _|  _| 
+
+while true; do
+
+	DATE=$(date '+%Y %b %d (%a) %I:%M%p')
+	MEM=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
+	TEMP=$(sensors | awk '/^CPU/ {print $2}' | awk NR==1)
+	DISK=$(df -h | awk '/^\/dev\/sda3/ {print $3 "/" $2 " ("$5")"}')
+	
+	# SONG="..."
+	# [ "$(mocp -Q %title)" ] && SONG=$(mocp -Q '%song - %artist' | cut -c -40) 
+	# SSTATE=""
+	# [ "$(mocp -Q %state)" ] && SSTATE=$(mocp -Q %state | sed "s/PLAY/\ /;s/PAUSE/\ /")
+
+	UPDT="0"
+	UPDT=$(checkupdates | wc -l &)
+	
+	# VOL=$(amixer get Master | grep -o "[0-9]*%")
+	# ICON=""
+	# [ "$(amixer get Master | grep -o '\[on\]\|\[off\]')" = "[on]" ] && ICON=""
+	
+	BATT=$(cat /sys/class/power_supply/BAT0/capacity)
+	BATTSTAT=""
+	[ "$(cat /sys/class/power_supply/BAT0/status)" = "Charging" ] && BATTSTAT=" ^"
+
+	# xsetroot -name "󰇚 $UPDT | $ICON $VOL | $SSTATE$SONG |  $TEMP |  $MEM |  $DATE |  $BATT%$BATTSTAT"
+	xsetroot -name "󰇚 $UPDT |  $TEMP |  $MEM |  $DATE |  $BATT%$BATTSTAT"
+
+	sleep 60
+done &

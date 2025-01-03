@@ -1,0 +1,11 @@
+#! /usr/bin/sh
+
+new=$(printf | dmenu -p "New document:")
+
+[ "$new" = "" ] && exit 1
+
+cp -r ~/Documents/LaTeX/apa7 ~/Documents/LaTeX/$new
+cd ~/Documents/LaTeX/$new/
+pdflatex main.tex
+mupdf main.pdf &
+urxvt -e vim main.tex
