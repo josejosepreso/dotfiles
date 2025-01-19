@@ -1,0 +1,19 @@
+#!/usr/bin/sh
+
+read -p "Artist: " artist
+
+counter=1
+
+for current in *.mp3; do
+
+	temp=$(printf "%03d.mp3" "$counter")
+	title=$(echo $current | sed 's/[0-9]\+\ //; s/.mp3//')
+
+	mv -i -- "$current" "$temp"
+
+	ffmpeg -i $temp -c copy -metadata title="$title" -metadata artist="$artist" "$current"
+
+	rm $temp
+
+	let counter++
+done

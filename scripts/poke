@@ -1,0 +1,11 @@
+#!/usr/bin/sh
+
+# curl -s https://pokemon-project.com/episodios/latino/serie-ash/temporada-7 \
+#       | grep -o "https://pokemon-project.com/episodios/latino/serie-ash/temporada-7/episodio-.*[0-9]\">" \
+#       | sed 's/\">//' \
+#       | sort -u --version-sort \
+#       | fzf --bind 'enter:execute(mpv {})+accept' \
+
+# curl -s https://pokemon-project.com/episodios/latino/serie-ash/temporada-7 | grep -o "https://pokemon-project.com/episodios/latino/serie-ash/temporada-7/episodio-.*[0-9]\">" | sed 's/\">//' | sort -u --version-sort > ~/.pkm
+
+cat ~/.pkm | fzf --bind 'enter:execute(sed -i '1d' ~/.pkm)+execute(mpv {})+accept'

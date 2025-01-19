@@ -1,0 +1,31 @@
+#!/bin/sh
+
+if xdo id -a "$PANEL_WM_NAME" > /dev/null ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+# while true; do echo "Uupdt: $(checkupdates | wc -l)"; sleep 60; done > "$PANEL_FIFO" &
+# while true; do echo "M$(free -h | awk '/^Mem:/ {print $3 "/" $2}')"; sleep 60; done > "$PANEL_FIFO" &
+# while true; do echo "X$(sensors | awk '/^CPU/ {print $2}' | awk NR==1)"; sleep 60; done > "$PANEL_FIFO" &
+# while true; do echo "D$(df -h | awk '/^\/dev\/sda3/ {print $3 "/" $2 " ("$5")"}')"; done > "$PANEL_FIFO" &
+battery -i 10 -sf'B%s %i' > "$PANEL_FIFO" &
+# xtitle -t 45 -sf'T%s\n' > "$PANEL_FIFO" &
+clock -i 10 -sf'S%Y %b %d (%a) %I:%M%p' > $PANEL_FIFO &
+temp -i 10 -sf'X%.1f deg' -n0 > $PANEL_FIFO &
+/home/jose/Documents/Programming/PanelInfo/bin/Memory > $PANEL_FIFO &
+bspc subscribe report > "$PANEL_FIFO" &
+
+. panel_colors
+
+panel_bar < "$PANEL_FIFO" | lemonbar -a 32 -u 2 -n "$PANEL_WM_NAME" -g 1366 -f "Monospace-8" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
+
+wid=$(xdo id -m -a "$PANEL_WM_NAME")
+xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
+
+wait

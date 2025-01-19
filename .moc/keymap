@@ -1,0 +1,34 @@
+quit_client           = q
+quit                  = Q
+
+stop                  = s
+next                  = n
+previous              = b
+
+go_to_playing_file    = o
+
+toggle_layout         = L
+
+go                    = l
+go                   += ENTER
+go_up                 = h
+menu_down             = j
+menu_down            += DOWN
+menu_up               = k
+menu_up              += UP
+menu_page_down        = ^d
+# menu_page_up          = ^u
+menu_first_item       = g
+menu_last_item        = G
+
+enqueue_file          = z
+clear_queue           = Z
+
+clear_playlist        = C
+
+seek_forward_fast     = ]
+seek_backward_fast    = [
+
+toggle_shuffle        = S
+
+add_directory         = A

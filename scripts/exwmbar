@@ -1,0 +1,23 @@
+#!/usr/bin/sh
+
+fifo="/tmp/panel-fifo"
+[ -e "$fifo" ] && rm "$fifo"
+mkfifo "$fifo"
+
+battery -i 10 -sf 'B%s %i' > "$fifo" &
+clock -i 10 -sf 'S%Y %b %d (%a) %I:%M%p' > $fifo &
+temp -i 10 -sf'X%.1f deg' -n0 > $fifo &
+
+while read -r line; do
+    case $line in
+	B*)
+	    batt="${line#?}" ;;
+	
+	X*)
+	    temp="${line#?}";;
+
+	S*)
+	    sys="${line#?}" ;;
+    esac
+    printf "%s\n" "%{r}${temp} | ${sys} | ${batt}% "
+done < $fifo

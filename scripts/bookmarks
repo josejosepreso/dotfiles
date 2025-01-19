@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+l=$(cat /home/jose/.config/qutebrowser/bookmarks/urls | awk '{print $1}' | dmenu -l 30)
+[ "$l" = "" ] && exit 1
+librewolf "$l"
