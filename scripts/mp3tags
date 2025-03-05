@@ -15,5 +15,5 @@ for current in *.mp3; do
 
 	rm $temp
 
-	let counter++
+	counter=$((counter+1))
 done

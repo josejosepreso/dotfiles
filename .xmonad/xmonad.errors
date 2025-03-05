@@ -1,0 +1,8 @@
+$ ghc --make xmonad.hs -i -ilib -fforce-recomp -main-is main -dynamic -v0 -outputdir /home/jose/.xmonad/build-x86_64-linux -o /home/jose/.xmonad/xmonad-x86_64-linux
+
+xmonad.hs:109:30: error:
+    • Variable not in scope: windowCount :: X (Maybe String)
+    • Perhaps you meant ‘windowEvent’ (imported from XMonad)
+    |
+109 |               , ppExtras  = [windowCount]
+    |                              ^^^^^^^^^^^

@@ -61,9 +61,7 @@ alias campv='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed'
 # alias cdf='cd $(cat ~/.dmks | fzf)'
 alias cdf='cd "$(find ~ -type d | fzf)"'
 alias dmk='pwd >> ~/.dmks'
-alias mpc='mpc --host 192.168.0.19'
-alias ympd='ympd -h 192.168.0.19'
-alias ytfzf='ytfzf -D'
+alias livepdf='echo main.tex | entr -s "pdflatex main.tex; pkill -HUP mupdf"'
 
 export VISUAL='vim'
 export EDITOR='vim'
@@ -71,6 +69,7 @@ export PATH=$PATH:/home/jose/.cargo/bin
 export PATH=$PATH:/home/jose/scripts
 export PATH=$PATH:/home/jose/.local/bin
 export PATH=$PATH:/home/jose/.config/bspwm
+export PATH=$PATH:/home/jose/Documents/Programming/E-S/
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 

@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+echo main.tex | entr -s "pdflatex main.tex; pkill -HUP mupdf"

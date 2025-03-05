@@ -3,42 +3,45 @@
 from telethon import TelegramClient
 import argparse
 
-api_id = 
-api_hash = 
-client = TelegramClient('anon', api_id, api_hash)
+try:
+    with open("/home/jose/api/telegram", "r") as f:
+        lines = [line.strip() for line in f]
+except Exception:
+    exit()
+
+api_id = lines[0]
+api_hash = lines[1]
+client = TelegramClient("anon", api_id, api_hash)
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('-m', '--message', type=str, help='')
-parser.add_argument('-f', '--file', type=str, help='')
-parser.add_argument('-s', '--show', nargs='?', const='me', type=str)
-parser.add_argument('-d', '--download', action='store_true')
+parser.add_argument("-m", "--message", type=str, help="")
+parser.add_argument("-f", "--file", type=str, help="")
+parser.add_argument("-s", "--show", nargs="?", const="me", type=str)
+parser.add_argument("-d", "--download", action="store_true")
 
 args = parser.parse_args()
 
 async def main():
     if(args.message):
-        await client.send_message('me', args.message)
+        await client.send_message("me", args.message)
 
-        print('Message sent successfully!')
+        print("Message sent successfully!")
 
     if(args.file):
-        await client.send_file('me', force_document=True, file=args.file, caption='')
+        await client.send_file("me", force_document=True, file=args.file, caption="")
 
-        print(args.file + ' sent successfully!')
+        print(args.file + " sent successfully!")
 
     if(args.show):
         channel = args.show
-
-        if(args.show == 'dot'):
-            channel = 't.me/+hjYtG8Nr9qlkNGMx'
 
         async for message in client.iter_messages(channel):
             print(message.id, message.text)
 
             if(args.download and message.document):
                 path = await message.download_media(file="/tmp")
-                print('File saved to', path)
+                print("File saved to", path)
 
 with client:
     client.loop.run_until_complete(main())
