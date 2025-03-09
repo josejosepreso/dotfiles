@@ -1,76 +1,31 @@
-from libqtile import bar, layout, qtile, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile import layout, qtile, hook
+from libqtile.config import Click, Drag, Group, Key
 from libqtile.lazy import lazy
 from keys import keys, mod
+from screens import screens
 
-groups = [Group(i) for i in "123456789"]
+groups = [Group(i) for i in [
+    "", "", "󰈙", "4", "5", "6", "", "", ""
+]]
 
-for i in groups:
+for i, group in enumerate(groups):
+    n = str(i+1)
     keys.extend(
         [
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc=f"Switch to group {i.name}",
-            ),
-            Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
+            Key([mod], n, lazy.group[group.name].toscreen()),
+            Key([mod, "shift"], n, lazy.window.togroup(group.name))
         ]
     )
 
 layouts = [
     layout.Columns(
-        # border_focus_stack=["#d75f5f", "#8f3d3d"],
         border_focus= "ffffff",
         border_normal= "1D2330",
         border_width=1,
         margin=3
-    ),
-    layout.Max(),
-]
-
-widget_defaults = dict(
-    font="Iosevka",
-    fontsize=12,
-    padding=3,
-)
-extension_defaults = widget_defaults.copy()
-
-screens = [
-    Screen(
-        top=bar.Bar(
-            [
-                widget.GroupBox(
-                    disable_drag=True,
-                    scroll=False,
-                ),
-                widget.Sep(padding=10),
-                widget.WindowName(
-                    disable_drag=True,
-                ),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.Sep(padding=10),
-                widget.Battery(
-                    format='{percent:2.0%} {char}',
-                    update_delay = 60
-                )
-            ],
-            18,
-        ),
-    ),
-    Screen(
-        top=bar.Bar(
-            [
-                widget.GroupBox(),
-                widget.Sep(padding=10),
-                widget.WindowName(),
-            ],
-            18,
-        ),
     )
 ]
 
-# Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
     Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
@@ -87,6 +42,6 @@ def _():
 @hook.subscribe.client_new
 def _(client):
     if client.name == "LibreWolf" or client.name == "qutebrowser":
-        client.togroup("9")
+        client.togroup("")
     elif client.name == "mpv":
-        client.togroup("8")
+        client.togroup("")
