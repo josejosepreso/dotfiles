@@ -1,46 +1,52 @@
 config.load_autoconfig()
 
 c.auto_save.session = True
-c.content.images = False
+c.content.images = True
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'chrome-devtools://*')
+config.set("content.javascript.enabled", True, "chrome-devtools://*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'devtools://*')
+config.set("content.javascript.enabled", True, "devtools://*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'chrome://*/*')
+config.set("content.javascript.enabled", True, "chrome://*/*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'qute://*/*')
+config.set("content.javascript.enabled", True, "qute://*/*")
 
 # Allow locally loaded documents to access remote URLs.
 # Type: Bool
-config.set('content.local_content_can_access_remote_urls', True, 'file:///home/jose/.local/share/qutebrowser/userscripts/*')
+config.set("content.local_content_can_access_remote_urls", True, "file:///home/jose/.local/share/qutebrowser/userscripts/*")
 
 # Allow locally loaded documents to access other local URLs.
 # Type: Bool
-config.set('content.local_content_can_access_file_urls', False, 'file:///home/jose/.local/share/qutebrowser/userscripts/*')
+config.set("content.local_content_can_access_file_urls", False, "file:///home/jose/.local/share/qutebrowser/userscripts/*")
 
 c.content.notifications.enabled = False
 c.content.autoplay = False
-c.colors.webpage.darkmode.enabled = False
+c.colors.webpage.darkmode.enabled = True
 c.url.default_page="about:blank"
-c.aliases={"o": "open"}
+c.aliases={"o": "open", "q": "quit"}
 c.url.searchengines={
-        "DEFAULT": "https://duckduckgo.com/lite/?q={}",
+        "DEFAULT": "https://duckduckgo.com/?q={}",
         "yt": "https://m.youtube.com/results?search_query={}",
         "aw": "https://wiki.archlinux.org/?search={}"
 }
 
-config.bind('I', 'set content.images true')
-config.bind('Z', 'set content.images false')
-config.bind('J', 'hint links spawn --detach mpv --ytdl-format=18 {hint-url}')
+config.bind("I", "adblock-update")
+# config.bind("J", "hint links spawn --detach mpv {hint-url}")
+config.bind("J", "hint links userscript yt_mpv")
 
-with config.pattern('*://play.pokemonshowdown.com/*') as p:
-    p.content.images = True
+#
+config.bind("<z><l>", "spawn --userscript qute-pass")
+config.bind("<z><u><l>", "spawn --userscript qute-pass --username-only")
+config.bind("<z><p><l>", "spawn --userscript qute-pass --password-only")
+config.bind("<z><o><l>", "spawn --userscript qute-pass --otp-only")
+
+with config.pattern("*://open.spotify.com/*") as p:
+    p.content.images = False

@@ -3,6 +3,7 @@ from libqtile.config import Click, Drag, Group, Key
 from libqtile.lazy import lazy
 from keys import keys, mod
 from screens import screens
+from libqtile.log_utils import logger
 
 groups = [Group(i) for i in [
     "", "", "󰈙", "4", "5", "6", "", "", ""
@@ -32,7 +33,7 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
-import subprocess
+import subprocess, re
 
 @hook.subscribe.startup_once
 def _():
@@ -41,7 +42,10 @@ def _():
 
 @hook.subscribe.client_new
 def _(client):
-    if client.name == "LibreWolf" or client.name == "qutebrowser":
+    logger.warning(client.name)
+    if client.name == "LibreWolf":
         client.togroup("")
-    elif client.name == "mpv":
+    elif re.search(".*qutebrowser.*", client.name) is not None:
+        client.togroup("")
+    elif re.search(".*mpv.*", client.name) is not None:
         client.togroup("")

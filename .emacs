@@ -127,7 +127,7 @@
  '(package-selected-packages
    '(afternoon-theme dashboard desktop-environment dracula-theme
 		     ef-themes exwm gruber-darker-theme haskell-mode
-		     markdown-mode projectile rust-mode
+		     markdown-mode ocaml-eglot projectile rust-mode
 		     tron-legacy-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

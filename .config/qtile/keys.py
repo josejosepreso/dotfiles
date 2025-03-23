@@ -69,7 +69,7 @@ def is_running(process):
 def mpd(qtile):
     qtile.groups_map[str(list(qtile.get_groups())[6])].toscreen()
     if not is_running("ncmpcpp"):
-        qtile.spawn("st -e ncmpcpp")
+        qtile.spawn("alacritty -e ncmpcpp")
     
 keys = [
     Key([mod], "k", lazy.layout.right()),
@@ -88,7 +88,8 @@ keys = [
 
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod], "p", lazy.spawn("dmenu_run")),
-    Key([mod], "c", lazy.function(mpd)),
+    Key([mod], "v", lazy.spawn(terminal + " -e ranger")),
+    Key([mod, "shift"], "v", lazy.spawn("cdfm")),
     Key([mod], "v", lazy.spawn(terminal + " -e ranger")),
     Key([mod], "e", lazy.spawn("emacs")),
     Key([mod, "shift"], "m", lazy.spawn("bookmarks")),

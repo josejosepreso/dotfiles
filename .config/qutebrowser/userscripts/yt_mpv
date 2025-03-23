@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "spawn --detach mpv \"$(echo "$QUTE_URL" | sed 's/&.*//')\"" >> "$QUTE_FIFO"

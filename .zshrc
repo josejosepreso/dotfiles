@@ -70,6 +70,7 @@ export PATH=$PATH:/home/jose/scripts
 export PATH=$PATH:/home/jose/.local/bin
 export PATH=$PATH:/home/jose/.config/bspwm
 export PATH=$PATH:/home/jose/Documents/Programming/E-S/
+export WINIT_X11_SCALE_FACTOR=1
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
