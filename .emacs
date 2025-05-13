@@ -7,7 +7,15 @@
 (setq display-line-numbers 'relative)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq default-frame-alist '((font . "FiraCode Nerd Font 13")))
-(load-theme 'ef-dream t)
+;; (load-theme 'doom-sourcerer t)
+
+(require 'multiple-cursors)
+(global-set-key (kbd "C-c C-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(load-theme 'doom-miramare t)
 (setq backup-directory-alist `(("." . "~/.saves")))
 
 (require 'package)
@@ -23,7 +31,7 @@
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents  . 4)
 			  (projects . 4)))
-  (setq dashboard-startup-banner 1)
+  (setq dashboard-startup-banner 'logo)
   (setq dashboard-display-icons-p t)
   )
 
@@ -94,7 +102,30 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("11819dd7a24f40a766c0b632d11f60aaf520cf96bd6d8f35bae3399880937970"
+   '("b9761a2e568bee658e0ff723dd620d844172943eb5ec4053e2b199c59e0bcc22"
+     "51fa6edfd6c8a4defc2681e4c438caf24908854c12ea12a1fbfd4d055a9647a3"
+     "8363207a952efb78e917230f5a4d3326b2916c63237c1f61d7e5fe07def8d378"
+     "18a1d83b4e16993189749494d75e6adb0e15452c80c431aca4a867bcc8890ca9"
+     "75b371fce3c9e6b1482ba10c883e2fb813f2cc1c88be0b8a1099773eb78a7176"
+     "80f6ec0264b1b0a1449a6b74f7fb407e25118853bf6c96a9c21f4eef3143d926"
+     "d5fd482fcb0fe42e849caba275a01d4925e422963d1cd165565b31d3f4189c87"
+     "2b501400e19b1dd09d8b3708cefcb5227fda580754051a24e8abf3aff0601f87"
+     "ff24d14f5f7d355f47d53fd016565ed128bf3af30eb7ce8cae307ee4fe7f3fd0"
+     "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
+     "9d5124bef86c2348d7d4774ca384ae7b6027ff7f6eb3c401378e298ce605f83a"
+     "f64189544da6f16bab285747d04a92bd57c7e7813d8c24c30f382f087d460a33"
+     "4b6cc3b60871e2f4f9a026a5c86df27905fb1b0e96277ff18a76a39ca53b82e1"
+     "b754d3a03c34cfba9ad7991380d26984ebd0761925773530e24d8dd8b6894738"
+     "0c83e0b50946e39e237769ad368a08f2cd1c854ccbcd1a01d39fdce4d6f86478"
+     "2078837f21ac3b0cc84167306fa1058e3199bbd12b6d5b56e3777a4125ff6851"
+     "0d2c5679b6d087686dcfd4d7e57ed8e8aedcccc7f1a478cd69704c02e4ee36fe"
+     "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
+     "9013233028d9798f901e5e8efb31841c24c12444d3b6e92580080505d56fd392"
+     "c5878086e65614424a84ad5c758b07e9edcf4c513e08a1c5b1533f313d1b17f1"
+     "b1791a921c4f38cb966c6f78633364ad880ad9cf36eef01c60982c54ec9dd088"
+     "ac893acecb0f1cf2b6ccea5c70ea97516c13c2b80c07f3292c21d6eb0cb45239"
+     "b3ba955a30f22fe444831d7bc89f6466b23db8ce87530076d1f1c30505a4c23b"
+     "11819dd7a24f40a766c0b632d11f60aaf520cf96bd6d8f35bae3399880937970"
      "6af300029805f10970ebec4cea3134f381cd02f04c96acba083c76e2da23f3ec"
      "b9c002dc827fb75b825da3311935c9f505d48d7ee48f470f0aa7ac5d2a595ab2"
      "19b62f442479efd3ca4c1cef81c2311579a98bbc0f3684b49cdf9321bd5dfdbf"
@@ -125,10 +156,12 @@
      "01a9797244146bbae39b18ef37e6f2ca5bebded90d9fe3a2f342a9e863aaa4fd"
      default))
  '(package-selected-packages
-   '(afternoon-theme dashboard desktop-environment dracula-theme
-		     ef-themes exwm gruber-darker-theme haskell-mode
-		     markdown-mode ocaml-eglot projectile rust-mode
-		     tron-legacy-theme)))
+   '(afternoon-theme curry-on-theme dashboard desktop-environment
+		     doom-themes dracula-theme ef-themes elm-mode evil
+		     exwm gruber-darker-theme gruvbox-theme
+		     haskell-mode lua-mode magit markdown-mode
+		     multiple-cursors ocaml-eglot php-mode projectile
+		     rust-mode tron-legacy-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

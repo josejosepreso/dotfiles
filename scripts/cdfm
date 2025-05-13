@@ -1,2 +1,0 @@
-#!/usr/bin/sh
-cat ~/directories | dmenu -i -l 30 | xargs pcmanfm

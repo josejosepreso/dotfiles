@@ -1,5 +1,5 @@
 #! /usr/bin/sh
 
-find /home/jose/Music/ \
-	| dmenu -i -l 30 \
-	| xargs -d '\n' mpv --force-window=yes
+find /home/jose/Music -type f \
+    | sed "s/\/home\/jose\/Music\///g" \
+    | fzf --bind 'enter:execute(mpc add {}; mpc playlist | wc -l | xargs mpc play)+accept'

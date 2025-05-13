@@ -1,0 +1,155 @@
+! URxvt*background: #212121
+! URxvt*foreground: #D2C5BC
+! !#D2C5BC
+! !black
+! URxvt*color0:#777777
+! URxvt*color8:#777777
+! !red
+! URxvt*color1:#a19488
+! URxvt*color9:#a19488
+! !green
+! URxvt*color2:#88a194
+! URxvt*color10:#88a194
+! !yellow
+! URxvt*color3:#95a188
+! URxvt*color11:#95a188
+! !blue
+! URxvt*color4:#9488a1
+! URxvt*color12:#9488a1
+! !magenta
+! URxvt*color5:#a18895
+! URxvt*color13:#a18895
+! !cyan
+! URxvt*color6:#8895a1
+! URxvt*color14:#8895a1
+! !white
+! URxvt*color7:#d9d9d9
+! URxvt*color15:#d9d9d9
+
+
+
+
+
+
+*.foreground:   #c5c8c6
+*.background:   #333232
+*.cursorColor:  #c5c8c6
+
+! black
+*.color0:       #585c69
+*.color8:       #585c69
+
+! red
+*.color1:       #cab0a1
+*.color9:       #cab0a1
+
+! green
+*.color2:       #9f8578
+*.color10:      #9f8578
+
+! yellow
+*.color3:       #986c5b
+*.color11:      #986c5b
+
+! blue
+*.color4:       #808178
+*.color12:      #808178
+
+! magenta
+*.color5:       #979892
+*.color13:      #979892
+
+! cyan
+*.color6:       #cab0a1
+*.color14:      #cab0a1
+
+! white
+*.color7:       #707880
+*.color15:      #707880
+
+
+
+
+! special
+*.foreground:   #f1fcf8
+*.background:   #111012
+*.cursorColor:  #f1fcf8
+
+! black
+*.color0:       #b4b4aa
+*.color8:       #b4b4aa
+
+! red
+*.color1:       #64605f
+*.color9:       #64605f
+
+! green
+*.color2:       #7e8d88
+*.color10:      #7e8d88
+
+! yellow
+*.color3:       #d0d4b9
+*.color11:      #d0d4b9
+
+! blue
+*.color4:       #b0c2c2
+*.color12:      #b0c2c2
+
+! magenta
+*.color5:       #f3fcf7
+*.color13:      #f3fcf7
+
+! cyan
+*.color6:       #988c80
+*.color14:      #988c80
+
+! white
+*.color7:       #70735e
+*.color15:      #70735e
+
+
+
+!! URxvt Appearance
+URxvt.font: xft:Iosevka:style=Regular:size=11
+URxvt.boldFont: xft:Iosevka:style=Bold:size=11
+URxvt.italicFont: xft:Iosevka:style=Italic:size=11
+!! URxvt.font: xft:0xProto Nerd Font Mono:pixelsize=15
+URxvt.boldItalicFont: xft:Iosevka:style=Bold Italic:size=11
+
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+!! URxvt.geometry: 120x30
+URxvt.geometry: 400x400
+URxvt.internalBorder: 0
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755: false
+
+!! Common Keybinds for Navigations
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
+URxvt.keysym.Control-Up: \033[1;5A
+URxvt.keysym.Control-Down: \033[1;5B
+URxvt.keysym.Control-Right: \033[1;5C
+URxvt.keysym.Control-Left: \033[1;5D
+
+!! Copy Paste & Other Extensions
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.underlineURLs: true
+URxvt.urlButton: 1
+
+URxvt.visualBell: true
+

@@ -1,9 +1,45 @@
+# Primary colors
+[colors.primary]
+background = '#111012'
+foreground = '#f1fcf8'
+
+# Colors used for 'custom_cursor_colors'
+[colors.cursor]
+text = '#bbbbbb'
+cursor = '#ff0017'
+
+# Colors 0 through 7
+[colors.normal]
+black = '#b4b4aa'
+red = '#64605f'
+green = '#7e8d88'
+yellow = '#d0d4b9'
+blue = '#b0c2c2'
+magenta = '#f3fcf7'
+cyan = '#988c80'
+white = '#70735e'
+
+# Colors 8 through 15
+[colors.bright]
+black = '#b4b4aa'
+red = '#64605f'
+green = '#7e8d88'
+yellow = '#d0d4b9'
+blue = '#b0c2c2'
+magenta = '#f3fcf7'
+cyan = '#988c80'
+white = '#70735e'
+
+[window]
+opacity = 0.9
+
+[window.dimensions]
+columns=105
+lines=30
+
 [font]
-size = 12.0
+size = 11.5
 
 [font.normal]
 family = "Iosevka"
 style = "Regular"
-
-[window]
-opacity = 1.0

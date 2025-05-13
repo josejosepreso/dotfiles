@@ -56,24 +56,25 @@ alias mp3='yt-dlp -x --audio-format mp3 --audio-quality 0'
 alias pkglist='pacman -Qqe | grep -v base'
 alias ls='eza -al --color=always --group-directories-first'
 alias grep='grep --color=auto'
-alias screenrec='ffmpeg -video_size 1366x768 -framerate 25 -f x11grab -i :0.0 -f alsa -i hw:1 output.mkv'
+alias screenrec='ffmpeg -video_size 1366x768 -framerate 25 -f x11grab -i :0.0 output.mkv'
+#alias screenrec='ffmpeg -video_size 1366x768 -framerate 25 -f x11grab -i :0.0 -f alsa -i hw:1 output.mkv'
 alias campv='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed'
-# alias cdf='cd $(cat ~/.dmks | fzf)'
-alias cdf='cd "$(find ~ -type d | fzf)"'
+alias cdf='cd "$(find . -type d | fzf)"'
 alias dmk='pwd >> ~/.dmks'
 alias livepdf='echo main.tex | entr -s "pdflatex main.tex; pkill -HUP mupdf"'
+alias emacs='emacs -nw'
+alias vim='nvim'
 
-export VISUAL='vim'
-export EDITOR='vim'
+export VISUAL='nvim'
+export EDITOR='nvim'
 export PATH=$PATH:/home/jose/.cargo/bin
 export PATH=$PATH:/home/jose/scripts
 export PATH=$PATH:/home/jose/.local/bin
 export PATH=$PATH:/home/jose/.config/bspwm
-export PATH=$PATH:/home/jose/Documents/Programming/E-S/
+# export PATH=$PATH:/home/jose/Documents/Programming/E-S/
 export WINIT_X11_SCALE_FACTOR=1
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 
 # uwufetch
 fastfetch

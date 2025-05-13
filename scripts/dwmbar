@@ -18,17 +18,18 @@ while true; do
 	# ICON=""
 	# [ "$(amixer get Master | grep -o '\[on\]\|\[off\]')" = "[on]" ] && ICON=""
 	
-	BATT=$(cat /sys/class/power_supply/BAT0/capacity)
-	BATTICON=""
-	[ $BATT -ge 25 ] && BATTICON=""
-	[ $BATT -ge 50 ] && BATTICON=""
-	[ $BATT -ge 75 ] && BATTICON=""
-	[ $BATT -ge 95 ] && BATTICON=""
-	BATTSTAT=""
-	[ "$(cat /sys/class/power_supply/BAT0/status)" = "Charging" ] && BATTSTAT=" ^"
+	# BATT=$(cat /sys/class/power_supply/BAT0/capacity)
+	# BATTICON=""
+	# [ $BATT -ge 25 ] && BATTICON=""
+	# [ $BATT -ge 50 ] && BATTICON=""
+	# [ $BATT -ge 75 ] && BATTICON=""
+	# [ $BATT -ge 95 ] && BATTICON=""
+	# BATTSTAT=""
+	# [ "$(cat /sys/class/power_supply/BAT0/status)" = "Charging" ] && BATTSTAT=" ^"
 
 	# xsetroot -name "󰇚 $UPDT | $ICON $VOL | $SSTATE$SONG |  $TEMP |  $MEM |  $DATE |  $BATT%$BATTSTAT"
-	xsetroot -name "󰇚 $UPDT |  $TEMP |  $MEM |  $DATE | $BATTICON $BATT%$BATTSTAT"
+	# xsetroot -name "󰇚 $UPDT |  $TEMP |  $MEM |  $DATE | $BATTICON $BATT%$BATTSTAT"
+	xsetroot -name "󰇚 $UPDT |  $TEMP |  $MEM |  $DATE | $(batt)"
 
 	sleep 60
 done &
