@@ -6,13 +6,27 @@
 
 config_version: 2
 settings:
+  colors.webpage.darkmode.algorithm:
+    global: lightness-cielab
   colors.webpage.darkmode.enabled:
     global: false
+  content.geolocation:
+    https://badoo.com: false
   content.images:
     global: true
+  content.javascript.clipboard:
+    https://translate.google.com: access-paste
   content.media.audio_capture:
     https://teams.microsoft.com: false
   content.media.audio_video_capture:
     https://teams.microsoft.com: false
   content.media.video_capture:
     https://teams.microsoft.com: false
+  downloads.prevent_mixed_content:
+    global: false
+  tabs.favicons.show:
+    global: always
+  tabs.position:
+    global: top
+  tabs.show:
+    global: multiple

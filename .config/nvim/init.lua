@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd({"BufWritePost"}, {
 
 vim.o.background = "dark"
 vim.cmd([[colorscheme gruvbox]])
--- vim.cmd.colorscheme("ef-owl")
+-- vim.cmd.colorscheme("ef-dream")
 
 --
 vim.keymap.set('n', '<Leader>e', '<cmd>NERDTreeToggle<cr>')
@@ -45,8 +45,9 @@ vim.keymap.set('n', '<Leader>e', '<cmd>NERDTreeToggle<cr>')
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<Leader><Leader>', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<Leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<Leader>b', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<Leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<Leader>bb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<Leader>bk', ':bd')
 
 --
 require'nvim-treesitter.configs'.setup {

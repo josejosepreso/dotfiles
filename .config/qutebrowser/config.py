@@ -31,23 +31,31 @@ c.tabs.show = "multiple"
 c.tabs.favicons.show = "always"
 c.tabs.position ="top"
 
+c.tabs.title.format = "{audio}{current_title}"
+
+config.bind("tt", "set tabs.show multiple")
+config.bind("tT", "set tabs.show never")
+config.bind("th", "set tabs.position left")
+config.bind("tk", "set tabs.position top")
+
 c.content.notifications.enabled = False
 c.content.autoplay = False
-c.colors.webpage.darkmode.enabled = False
-c.url.default_page="about:blank"
+c.colors.webpage.darkmode.enabled = True
+c.colors.webpage.darkmode.policy.images = 'never'
+c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
+# c.url.default_page="about:blank"
+c.url.default_page="file:///home/jose/.config/qutebrowser/home.html"
 c.aliases={"o": "open", "q": "quit"}
 c.url.searchengines={
         "DEFAULT": "https://duckduckgo.com/?q={}",
         "yt": "https://m.youtube.com/results?search_query={}",
         "aw": "https://wiki.archlinux.org/?search={}",
-        "hs": "https://hoogle.haskell.org/?hoogle={}"
+        "hs": "https://hoogle.haskell.org/?hoogle={}",
+        "gpt": "https://chat.openai.com/?q={}"
 }
 c.content.blocking.method = 'adblock'
 config.bind("I", "adblock-update")
-# config.bind("J", "hint links spawn --detach mpv {hint-url}")
 config.bind("J", "hint links userscript yt_mpv")
-
-c.tabs.title.format = "{audio}{current_title}"
 
 #
 config.bind("<z><l>", "spawn --userscript qute-pass")
@@ -55,5 +63,4 @@ config.bind("<z><u><l>", "spawn --userscript qute-pass --username-only")
 config.bind("<z><p><l>", "spawn --userscript qute-pass --password-only")
 config.bind("<z><o><l>", "spawn --userscript qute-pass --otp-only")
 
-with config.pattern("*://open.spotify.com/*") as p:
-    p.content.images = False
+config.source("gruvbox.py")

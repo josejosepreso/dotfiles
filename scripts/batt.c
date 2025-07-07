@@ -6,7 +6,7 @@
 #define CAPACITY_PATH "/sys/class/power_supply/BAT0/status"
 #define STATUS_PATH "/sys/class/power_supply/BAT0/capacity"
 
-#define LOW_BATTERY_ALERT "echo \"Low Battery\" | dzen2 -h 17 -fn $PANEL_FONT -bg \"#660000\" -p 2 -w 1366"
+#define LOW_BATTERY_ALERT "echo \"Low Battery\" | dzen2 -h 20 -fn $PANEL_FONT -bg \"#660000\" -p 5 -w 1366"
 // #define LOW_BATTERY_ALERT "herbe \"Low Battery\""
 
 void init(char *s, int size)

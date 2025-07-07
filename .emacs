@@ -6,8 +6,13 @@
 (global-display-line-numbers-mode)
 (setq display-line-numbers 'relative)
 (defalias 'yes-or-no-p 'y-or-n-p)
+(electric-indent-mode 0)
 (setq default-frame-alist '((font . "FiraCode Nerd Font 13")))
-;; (load-theme 'doom-sourcerer t)
+;;(setq default-frame-alist '((font . "Iosevka 13")))
+;;(load-theme 'doom-sourcerer t)
+;;(load-theme 'doom-miramare t)
+(load-theme 'ef-dream t)
+;;(load-theme 'gruvbox t)
 
 (require 'multiple-cursors)
 (global-set-key (kbd "C-c C-c") 'mc/edit-lines)
@@ -15,7 +20,6 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
-(load-theme 'doom-miramare t)
 (setq backup-directory-alist `(("." . "~/.saves")))
 
 (require 'package)
@@ -32,7 +36,6 @@
   (setq dashboard-items '((recents  . 4)
 			  (projects . 4)))
   (setq dashboard-startup-banner 'logo)
-  (setq dashboard-display-icons-p t)
   )
 
 ;; EXWM
@@ -102,7 +105,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("b9761a2e568bee658e0ff723dd620d844172943eb5ec4053e2b199c59e0bcc22"
+   '("211621592803ada9c81ec8f8ba0659df185f9dc06183fcd0e40fbf646c995f23"
+     "b9761a2e568bee658e0ff723dd620d844172943eb5ec4053e2b199c59e0bcc22"
      "51fa6edfd6c8a4defc2681e4c438caf24908854c12ea12a1fbfd4d055a9647a3"
      "8363207a952efb78e917230f5a4d3326b2916c63237c1f61d7e5fe07def8d378"
      "18a1d83b4e16993189749494d75e6adb0e15452c80c431aca4a867bcc8890ca9"
@@ -160,8 +164,9 @@
 		     doom-themes dracula-theme ef-themes elm-mode evil
 		     exwm gruber-darker-theme gruvbox-theme
 		     haskell-mode lua-mode magit markdown-mode
-		     multiple-cursors ocaml-eglot php-mode projectile
-		     rust-mode tron-legacy-theme)))
+		     multiple-cursors neotree ocaml-eglot php-mode
+		     projectile rust-mode terraform-mode
+		     tron-legacy-theme typespec-ts-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

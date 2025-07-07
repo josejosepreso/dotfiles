@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+
+chosen=$(cat ~/Downloads/emoji | dmenu -i -p "emoji" -l 15 | awk '{print $1}')
+
+[ -z "$chosen" ] && exit
+
+xdotool type "$chosen"

@@ -62,7 +62,7 @@ alias campv='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed'
 alias cdf='cd "$(find . -type d | fzf)"'
 alias dmk='pwd >> ~/.dmks'
 alias livepdf='echo main.tex | entr -s "pdflatex main.tex; pkill -HUP mupdf"'
-alias emacs='emacs -nw'
+alias tf='terraform'
 alias vim='nvim'
 
 export VISUAL='nvim'

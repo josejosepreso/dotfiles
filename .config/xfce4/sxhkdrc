@@ -1,0 +1,38 @@
+ctrl + alt + t
+	alacritty
+
+super + Return
+	xfce4-appfinder
+
+{XF86MonBrightnessUp, XF86MonBrightnessDown}
+	brightnessctl set {+3%, 3%-}
+
+{XF86AudioLowerVolume, XF86AudioRaiseVolume}
+	mpc volume {-5, +5}
+
+{XF86AudioNext, XF86AudioPrev, XF86AudioPlay}
+	mpc {next,prev,toggle}
+
+Print
+	flameshot gui
+
+super + e
+  emacs
+
+super + v
+  alacritty -e ranger
+
+super + c
+	alacritty -e tmux a -t ncmpcpp
+
+super + n
+	st -g="120x30" -e mplay
+
+super + p
+	dmenu_run
+
+super + space
+	ls /usr/share/X11/xkb/symbols | dmenu -l 20 | xargs setxkbmap
+
+super + shift + d
+	cat ~/.config/qutebrowser/bookmarks/urls | dmenu -l 20 | xargs xdotool type
