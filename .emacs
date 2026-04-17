@@ -6,19 +6,84 @@
 (global-display-line-numbers-mode)
 (setq display-line-numbers 'relative)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(electric-indent-mode 0)
-(setq default-frame-alist '((font . "FiraCode Nerd Font 13")))
-;;(setq default-frame-alist '((font . "Iosevka 13")))
-;;(load-theme 'doom-sourcerer t)
-;;(load-theme 'doom-miramare t)
-(load-theme 'ef-dream t)
-;;(load-theme 'gruvbox t)
+;; (setq default-frame-alist '((font . "Fira Code Nerd Font 13")))
+(setq default-frame-alist '((font . "Iosevka 14")))
+;; (load-theme 'doom-sourcerer t)
+(load-theme 'doom-miramare t)
+;; (load-theme 'kanagawa-dragon t)
+;; (load-theme 'kanagawa-dragon t)
+;; (load-theme 'gruber-darker t)
+
+
+
+
+
+; START TABS CONFIG
+;; Create a variable for our preferred tab width
+(setq custom-tab-width 4)
+
+;; Two callable functions for enabling/disabling tabs in Emacs
+(defun disable-tabs () (setq indent-tabs-mode nil))
+(defun enable-tabs  ()
+  (local-set-key (kbd "TAB") 'tab-to-tab-stop)
+  (setq indent-tabs-mode t)
+  (setq tab-width custom-tab-width))
+
+;; Hooks to Enable Tabs
+(add-hook 'prog-mode-hook 'enable-tabs)
+;; Hooks to Disable Tabs
+(add-hook 'lisp-mode-hook 'disable-tabs)
+(add-hook 'emacs-lisp-mode-hook 'disable-tabs)
+
+;; Language-Specific Tweaks
+(setq-default python-indent-offset custom-tab-width) ;; Python
+(setq-default js-indent-level custom-tab-width)      ;; Javascript
+
+;; Making electric-indent behave sanely
+(setq-default electric-indent-inhibit t)
+
+;; Make the backspace properly erase the tab instead of
+;; removing 1 space at a time.
+(setq backward-delete-char-untabify-method 'hungry)
+
+;; WARNING: This will change your life
+;; (OPTIONAL) Visualize tabs as a pipe character - "|"
+;; This will also show trailing characters as they are useful to spot.
+(setq whitespace-style '(face tabs tab-mark trailing))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(whitespace-tab ((t (:foreground "#636363")))))
+(setq whitespace-display-mappings
+  '((tab-mark 9 [124 9] [92 9]))) ; 124 is the ascii ID for '\|'
+(global-whitespace-mode) ; Enable whitespace mode everywhere
+; END TABS CONFIG
+
+
+
+
+(require 'company)
+(global-company-mode 1)
+(global-set-key (kbd "M-/") 'company-complete)
 
 (require 'multiple-cursors)
 (global-set-key (kbd "C-c C-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(require 'lsp-java)
+(add-hook 'java-mode-hook #'lsp)
+
+(setq lsp-java-vmargs
+      (list
+       "-noverify"
+       "-Xmx1G"
+       "-XX:+UseG1GC"
+       "-XX:+UseStringDeduplication"
+       "-javaagent:/home/jose/.m2/repository/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar"))
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
@@ -29,14 +94,14 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-(use-package dashboard
-  :config
-  (setq dashboard-projects-backend 'projectile)
-  (dashboard-setup-startup-hook)
-  (setq dashboard-items '((recents  . 4)
-			  (projects . 4)))
-  (setq dashboard-startup-banner 'logo)
-  )
+;;(use-package dashboard
+;;  :config
+;;  (setq dashboard-projects-backend 'projectile)
+;;  (dashboard-setup-startup-hook)
+;;  (setq dashboard-items '((recents  . 4)
+;;			  (projects . 4)))
+;;  (setq dashboard-startup-banner 'logo)
+;;  )
 
 ;; EXWM
 ;; (setq last-workspace 0)
@@ -105,7 +170,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("211621592803ada9c81ec8f8ba0659df185f9dc06183fcd0e40fbf646c995f23"
+   '("daa27dcbe26a280a9425ee90dc7458d85bd540482b93e9fa94d4f43327128077"
+     "c20728f5c0cb50972b50c929b004a7496d3f2e2ded387bf870f89da25793bb44"
+     "d2ab3d4f005a9ad4fb789a8f65606c72f30ce9d281a9e42da55f7f4b9ef5bfc6"
+     "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8"
+     "571661a9d205cb32dfed5566019ad54f5bb3415d2d88f7ea1d00c7c794e70a36"
+     "2721b06afaf1769ef63f942bf3e977f208f517b187f2526f0e57c1bd4a000350"
+     "211621592803ada9c81ec8f8ba0659df185f9dc06183fcd0e40fbf646c995f23"
      "b9761a2e568bee658e0ff723dd620d844172943eb5ec4053e2b199c59e0bcc22"
      "51fa6edfd6c8a4defc2681e4c438caf24908854c12ea12a1fbfd4d055a9647a3"
      "8363207a952efb78e917230f5a4d3326b2916c63237c1f61d7e5fe07def8d378"
@@ -160,17 +231,14 @@
      "01a9797244146bbae39b18ef37e6f2ca5bebded90d9fe3a2f342a9e863aaa4fd"
      default))
  '(package-selected-packages
-   '(afternoon-theme curry-on-theme dashboard desktop-environment
+   '(afternoon-theme curry-on-theme dap-mode dashboard
+		     desktop-environment docker dockerfile-mode
 		     doom-themes dracula-theme ef-themes elm-mode evil
 		     exwm gruber-darker-theme gruvbox-theme
-		     haskell-mode lua-mode magit markdown-mode
-		     multiple-cursors neotree ocaml-eglot php-mode
-		     projectile rust-mode terraform-mode
-		     tron-legacy-theme typespec-ts-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+		     haskell-mode kanagawa-themes lsp-java lua-mode
+		     magit markdown-mode multiple-cursors neotree
+		     ocaml-eglot php-mode projectile rust-mode
+		     terraform-mode tron-legacy-theme typescript-mode
+		     typespec-ts-mode yaml-mode)))
+
 (put 'downcase-region 'disabled nil)

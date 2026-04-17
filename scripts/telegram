@@ -2,15 +2,17 @@
 
 from telethon import TelegramClient
 import argparse
+import asyncio
 
-try:
-    with open("/home/jose/api/telegram", "r") as f:
-        lines = [line.strip() for line in f]
-except Exception:
-    exit()
+def get_api_keys():
+    lines = open("/home/jose/api/telegram", "r").readlines()
+    return lines[0], lines[1]
 
-api_id = lines[0]
-api_hash = lines[1]
+api_id, api_hash = get_api_keys()
+
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+
 client = TelegramClient("anon", api_id, api_hash)
 
 parser = argparse.ArgumentParser()
@@ -23,24 +25,24 @@ parser.add_argument("-d", "--download", action="store_true")
 args = parser.parse_args()
 
 async def main():
-    if(args.message):
+    if args.message:
         await client.send_message("me", args.message)
 
         print("Message sent successfully!")
 
-    if(args.file):
-        await client.send_file("me", force_document=True, file=args.file, caption="")
+    elif args.file:
+        await client.send_file("me", force_document = True, file = args.file, caption = "")
 
         print(args.file + " sent successfully!")
 
-    if(args.show):
+    elif args.show:
         channel = args.show
 
         async for message in client.iter_messages(channel):
             print(message.id, message.text)
 
-            if(args.download and message.document):
-                path = await message.download_media(file="/tmp")
+            if args.download and message.document:
+                path = await message.download_media(file = "/tmp")
                 print("File saved to", path)
 
 with client:

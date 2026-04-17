@@ -6,6 +6,8 @@
 #       | sort -u --version-sort \
 #       | fzf --bind 'enter:execute(mpv {})+accept' \
 
-# curl -s https://pokemon-project.com/episodios/latino/serie-ash/temporada-7 | grep -o "https://pokemon-project.com/episodios/latino/serie-ash/temporada-7/episodio-.*[0-9]\">" | sed 's/\">//' | sort -u --version-sort > ~/.pkm
+# curl -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" -s https://pokemon-project.com/episodios/latino/serie-ash/temporada-7 | grep -o "https://pokemon-project.com/episodios/latino/serie-ash/temporada-7/episodio-.*[0-9]\">" | sed 's/\">//' | sort -u --version-sort > ~/.pkm
 
-cat ~/.pkm | fzf --bind 'enter:execute(sed -i '1d' ~/.pkm)+execute(mpv {})+accept'
+# cat ~/.pkm | fzf --bind 'enter:execute(sed -i '1d' ~/.pkm)+execute(mpv {})+accept'
+
+cat ~/.pkm | fzf --bind 'enter:execute(mpv {})+accept'

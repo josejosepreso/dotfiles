@@ -30,8 +30,8 @@ while true; do
 	# xsetroot -name "󰇚 $UPDT | $ICON $VOL | $SSTATE$SONG |  $TEMP |  $MEM |  $DATE |  $BATT%$BATTSTAT"
 	# xsetroot -name "󰇚 $UPDT |  $TEMP |  $MEM |  $DATE | $BATTICON $BATT%$BATTSTAT"
 	# xsetroot -name "󰇚 $UPDT |  $TEMP |  $MEM |  $DATE | $(batt)"
-	xsetroot -name " $TEMP |  $MEM |  $DATE | $(batt)"
-	# xsetroot -name " $TEMP |  $MEM |  $DATE"
+	# xsetroot -name " $TEMP |  $MEM |  $DATE | $(batt)"
+	xsetroot -name " $TEMP |  $MEM |  $DATE"
 
 	sleep 60
 done &
