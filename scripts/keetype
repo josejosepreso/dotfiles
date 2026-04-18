@@ -1,13 +1,15 @@
 #!/bin/bash
 
-DATABASE_FILE="$HOME/documents/keepass.kdbx"
-KEY_FILE="$HOME/documents/keyfile"
-TMP_FILE="/tmp/fd9b1aef3b18e1a1ddca76017c1ed0829e74d95af297221002050cf8ea4fff89"
+DATABASE_FILE=$KEEPASS_DATABASE_PATH
+KEY_FILE=$KEYFILE_PATH
+TMP_FILE=$TMP_KEEPASS_FILE
+STORE_TMP_FILE=false
 
 pass=$(< $TMP_FILE) \
 	|| pass=$(dmenu -p "Master password:" -nf "#282828" < /dev/null) \
-	&& printf "%s" $pass > $TMP_FILE \
 	|| exit 1
+
+[[ $STORE_TMP_FILE == "true" ]] && printf "%s" $pass > $TMP_FILE
 
 entries=$(keepassxc-cli ls -Rf -k $KEY_FILE $DATABASE_FILE <<< $pass) || { rm $TMP_FILE ; exit 1; }
 
@@ -18,12 +20,12 @@ output=$(keepassxc-cli show -s -k $KEY_FILE $DATABASE_FILE $entry <<< $pass)
 username=$(awk -F ':' '/^UserName/ {print $2}' <<< $output)
 pass=$(awk -F ':' '/^Password/ {print $2}' <<< $output)
 
-type_x() { xdotool type $1 || exit 1 && unset $1; }
+type_x() { [[ -n "$1" ]] && xdotool type $1 || exit 1 && unset $1; }
 type_password() { type_x $pass; }
 type_username() { type_x $username; }
 
-[ "u" = "$1" ] && type_username && exit 0
-[ "p" = "$1" ] && type_password && exit 0
+[[ "u" == "$1" ]] && type_username && exit 0
+[[ "p" == "$1" ]] && type_password && exit 0
 
 type_username
 xdotool key Tab || exit 1

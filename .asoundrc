@@ -1,5 +1,5 @@
-defaults.pcm.card 1
-defaults.ctl.card 1
+defaults.pcm.card 0
+defaults.ctl.card 0
 
 ctl.equal {
     type equal;
@@ -24,3 +24,35 @@ pcm.!default {
     type plug;
     slave.pcm plugequal;
 }
+
+
+
+# pcm.bluetooth {
+#     type plug
+#     slave {
+#         pcm {
+#             type bluealsa
+#             device "EF:D7:11:19:A7:87"
+#             profile "a2dp"
+#         }
+#     }
+# }
+# 
+# pcm.plugequal {
+#     type equal
+#     slave.pcm "plug:dmix"
+#     slave.pcm "bluetooth"
+# }
+# 
+# ctl.equal {
+#     type equal
+# }
+# 
+# ctl.!default {
+#     type equal
+# }
+# 
+# pcm.!default {
+#     type plug
+#     slave.pcm "plugequal"
+# }

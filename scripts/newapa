@@ -1,8 +1,6 @@
 #! /usr/bin/sh
 
-new=$(printf | dmenu -p "New document:")
-
-[ "$new" = "" ] && exit 1
+new=$(dmenu -p "New document:" < /dev/null) || exit 1
 
 cp -r ~/Documents/LaTeX/apa7 ~/Documents/LaTeX/$new
 cd ~/Documents/LaTeX/$new/

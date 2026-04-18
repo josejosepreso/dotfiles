@@ -39,31 +39,31 @@ cursor = '#ff0017'
 
 
 # Primary colors
-[colors.primary]
-background = '#333232'
-foreground = '#c5c8c6'
-
-# Colors 0 through 7
-[colors.normal]
-black = '#585c69'
-red = '#cab0a1'
-green = '#9f8578'
-yellow = '#986c5b'
-blue = '#808178'
-magenta = '#979892'
-cyan = '#cab0a1'
-white = '#707880'
-
-# Colors 8 through 15
-[colors.bright]
-black = '#585c69'
-red = '#cab0a1'
-green = '#9f8578'
-yellow = '#986c5b'
-blue = '#808178'
-magenta = '#979892'
-cyan = '#cab0a1'
-white = '#707880'
+# [colors.primary]
+# background = '#333232'
+# foreground = '#c5c8c6'
+# 
+# # Colors 0 through 7
+# [colors.normal]
+# black = '#585c69'
+# red = '#cab0a1'
+# green = '#9f8578'
+# yellow = '#986c5b'
+# blue = '#808178'
+# magenta = '#979892'
+# cyan = '#cab0a1'
+# white = '#707880'
+# 
+# # Colors 8 through 15
+# [colors.bright]
+# black = '#585c69'
+# red = '#cab0a1'
+# green = '#9f8578'
+# yellow = '#986c5b'
+# blue = '#808178'
+# magenta = '#979892'
+# cyan = '#cab0a1'
+# white = '#707880'
 
 [window]
 opacity = 0.95
@@ -73,8 +73,36 @@ columns=125
 lines=30
 
 [font]
-size = 11.5
+size = 13
 
 [font.normal]
 family = "Iosevka"
 style = "Regular"
+
+[window.padding]
+x = 2
+y = 2
+
+[colors.primary]
+background = "#111012"
+foreground = "#f1fcf8"
+
+[colors.normal]
+black   = "#b4b4aa"
+red     = "#64605f"
+green   = "#7e8d88"
+yellow  = "#d0d4b9"
+blue    = "#b0c2c2"
+magenta = "#f3fcf7"
+cyan    = "#988c80"
+white   = "#70735e"
+
+[colors.bright]
+black   = "#b4b4aa"
+red     = "#64605f"
+green   = "#7e8d88"
+yellow  = "#d0d4b9"
+blue    = "#b0c2c2"
+magenta = "#f3fcf7"
+cyan    = "#988c80"
+white   = "#70735e"
