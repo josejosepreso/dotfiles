@@ -9,36 +9,36 @@ cursor = '#ff0017'
 
 
 
-# # Primary colors
-# [colors.primary]
-# background = '#111012'
-# foreground = '#f1fcf8'
-# 
-# # Colors 0 through 7
-# [colors.normal]
-# black = '#b4b4aa'
-# red = '#64605f'
-# green = '#7e8d88'
-# yellow = '#d0d4b9'
-# blue = '#b0c2c2'
-# magenta = '#f3fcf7'
-# cyan = '#988c80'
-# white = '#70735e'
-# 
-# # Colors 8 through 15
-# [colors.bright]
-# black = '#b4b4aa'
-# red = '#64605f'
-# green = '#7e8d88'
-# yellow = '#d0d4b9'
-# blue = '#b0c2c2'
-# magenta = '#f3fcf7'
-# cyan = '#988c80'
-# white = '#70735e'
-
-
-
 # Primary colors
+[colors.primary]
+background = '#111012'
+foreground = '#f1fcf8'
+
+# Colors 0 through 7
+[colors.normal]
+black = '#b4b4aa'
+red = '#64605f'
+green = '#7e8d88'
+yellow = '#d0d4b9'
+blue = '#b0c2c2'
+magenta = '#f3fcf7'
+cyan = '#988c80'
+white = '#70735e'
+
+# Colors 8 through 15
+[colors.bright]
+black = '#b4b4aa'
+red = '#64605f'
+green = '#7e8d88'
+yellow = '#d0d4b9'
+blue = '#b0c2c2'
+magenta = '#f3fcf7'
+cyan = '#988c80'
+white = '#70735e'
+
+
+
+# # Primary colors
 # [colors.primary]
 # background = '#333232'
 # foreground = '#c5c8c6'
@@ -66,10 +66,10 @@ cursor = '#ff0017'
 # white = '#707880'
 
 [window]
-opacity = 0.95
+opacity = 0.9
 
 [window.dimensions]
-columns=125
+columns=135
 lines=30
 
 [font]
@@ -83,26 +83,26 @@ style = "Regular"
 x = 2
 y = 2
 
-[colors.primary]
-background = "#111012"
-foreground = "#f1fcf8"
-
-[colors.normal]
-black   = "#b4b4aa"
-red     = "#64605f"
-green   = "#7e8d88"
-yellow  = "#d0d4b9"
-blue    = "#b0c2c2"
-magenta = "#f3fcf7"
-cyan    = "#988c80"
-white   = "#70735e"
-
-[colors.bright]
-black   = "#b4b4aa"
-red     = "#64605f"
-green   = "#7e8d88"
-yellow  = "#d0d4b9"
-blue    = "#b0c2c2"
-magenta = "#f3fcf7"
-cyan    = "#988c80"
-white   = "#70735e"
+# [colors.primary]
+# background = "#111012"
+# foreground = "#f1fcf8"
+# 
+# [colors.normal]
+# black   = "#b4b4aa"
+# red     = "#64605f"
+# green   = "#7e8d88"
+# yellow  = "#d0d4b9"
+# blue    = "#b0c2c2"
+# magenta = "#f3fcf7"
+# cyan    = "#988c80"
+# white   = "#70735e"
+# 
+# [colors.bright]
+# black   = "#b4b4aa"
+# red     = "#64605f"
+# green   = "#7e8d88"
+# yellow  = "#d0d4b9"
+# blue    = "#b0c2c2"
+# magenta = "#f3fcf7"
+# cyan    = "#988c80"
+# white   = "#70735e"

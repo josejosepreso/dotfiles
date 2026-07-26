@@ -1,3 +1,3 @@
 #!/bin/sh
 
-s=$(mpc listall | dmenu -i -l 30) || exit 1 && mpc add "$s" && mpc playlist | wc -l | xargs mpc play
+s=$(mpc listall | dmenu -i -l 30 -p "Select song") || exit 1 && mpc add "$s" && mpc playlist | wc -l | xargs mpc play

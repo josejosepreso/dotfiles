@@ -11,7 +11,6 @@
 ;; (load-theme 'doom-sourcerer t)
 (load-theme 'doom-miramare t)
 ;; (load-theme 'kanagawa-dragon t)
-;; (load-theme 'kanagawa-dragon t)
 ;; (load-theme 'gruber-darker t)
 
 
@@ -84,6 +83,12 @@
        "-XX:+UseG1GC"
        "-XX:+UseStringDeduplication"
        "-javaagent:/home/jose/.m2/repository/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar"))
+
+(use-package move-text
+  :ensure t
+  :config
+  (move-text-default-bindings))
+
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
@@ -170,7 +175,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("daa27dcbe26a280a9425ee90dc7458d85bd540482b93e9fa94d4f43327128077"
+   '("4c92d278dc295b63daf817d668523d442058d6c90728958dc92b6bc976fffd96"
+     "daa27dcbe26a280a9425ee90dc7458d85bd540482b93e9fa94d4f43327128077"
      "c20728f5c0cb50972b50c929b004a7496d3f2e2ded387bf870f89da25793bb44"
      "d2ab3d4f005a9ad4fb789a8f65606c72f30ce9d281a9e42da55f7f4b9ef5bfc6"
      "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8"
@@ -230,15 +236,6 @@
      "56044c5a9cc45b6ec45c0eb28df100d3f0a576f18eef33ff8ff5d32bac2d9700"
      "01a9797244146bbae39b18ef37e6f2ca5bebded90d9fe3a2f342a9e863aaa4fd"
      default))
- '(package-selected-packages
-   '(afternoon-theme curry-on-theme dap-mode dashboard
-		     desktop-environment docker dockerfile-mode
-		     doom-themes dracula-theme ef-themes elm-mode evil
-		     exwm gruber-darker-theme gruvbox-theme
-		     haskell-mode kanagawa-themes lsp-java lua-mode
-		     magit markdown-mode multiple-cursors neotree
-		     ocaml-eglot php-mode projectile rust-mode
-		     terraform-mode tron-legacy-theme typescript-mode
-		     typespec-ts-mode yaml-mode)))
+ '(package-selected-packages nil))
 
 (put 'downcase-region 'disabled nil)
