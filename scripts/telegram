@@ -6,7 +6,7 @@ import asyncio
 
 def get_api_keys():
     lines = open("/home/jose/api/telegram", "r").readlines()
-    return lines[0], lines[1]
+    return lines[0].strip(), lines[1].strip()
 
 api_id, api_hash = get_api_keys()
 

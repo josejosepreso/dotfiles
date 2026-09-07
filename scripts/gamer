@@ -1,0 +1,30 @@
+#!/bin/sh
+
+NES="nes"
+SNES="snes"
+DS="ds"
+N64="n64"
+
+GAMES_PATH="/home/jose/games/retroarch"
+CORES_PATH="$GAMES_PATH/cores/"
+
+get_libretro() {
+	case "$1" in
+		"$NES")
+			echo "nestopia" ;;
+		"$SNES")
+			echo "snes9x" ;;
+		"$DS")
+			echo "desmume" ;;
+		"$N64")
+			echo "mupen64plus_next" ;;
+		*)
+			exit 1
+	esac
+}
+
+platform=$(echo "$NES\n$SNES\n$DS\n$N64" | dmenu -l 20) || exit 1
+game=$(find $GAMES_PATH/$platform/ -type f | dmenu -l 20) || exit 1
+libretro="$(get_libretro $platform)_libretro.so"
+
+retroarch --libretro "$CORES_PATH/$libretro" "$game"

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# cat super-nintendo-snes-rom-collection-usa | grep -o "href=.*.zip\"" | sed "s/href=//" | sed "s/\"//g" | awk '{print "wget https://archive.org/download/super-nintendo-snes-rom-collection-usa/" $1}' | sh
+curl https://archive.org/download/super-nintendo-snes-rom-collection-usa | grep -o "href=.*.zip\"" | sed "s/href=//" | sed "s/\"//g" | awk '{print "wget https://archive.org/download/super-nintendo-snes-rom-collection-usa/" $1}' | sh

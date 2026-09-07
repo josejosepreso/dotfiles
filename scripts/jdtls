@@ -9,6 +9,6 @@ java \
 	--add-modules=ALL-SYSTEM \
 	--add-opens java.base/java.util=ALL-UNNAMED \
 	--add-opens java.base/java.lang=ALL-UNNAMED \
-	-jar /home/jose/Downloads/jdtls/plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar \
+	-jar /home/jose/downloads/jdtls/plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar \
 	-configuration /home/jose/Downloads/jdtls/config_linux \
 	-path .

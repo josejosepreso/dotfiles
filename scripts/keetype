@@ -1,27 +1,30 @@
 #!/bin/bash
 
-DATABASE_FILE=$KEEPASS_DATABASE_PATH
-KEY_FILE=$KEYFILE_PATH
-TMP_FILE=$TMP_KEEPASS_FILE
 STORE_TMP_FILE=true
 
-# MASTER_PASSWORD_COMMAND="dmenu -p \"Master password\" -nf \"#282828\""
-# SELECT_ENTRY_COMMAND="dmenu -l 15 -i"
-
+# MASTER_PASSWORD_COMMAND="dmenu -p \"Master password\" -nb \"#000000\" -nf \"#bbbbbb\" -sb \"#986c5b\" -sf \"#eeeeee\""
+# SELECT_ENTRY_COMMAND="dmenu -l 15 -i -nb \"#000000\" -nf \"#bbbbbb\" -sb \"#986c5b\" -sf \"#eeeeee\""
 MASTER_PASSWORD_COMMAND="rofi -dmenu -l 0 -p \"Master password\" -theme-str 'entry { enabled: false;}'"
 SELECT_ENTRY_COMMAND="rofi -dmenu -p \"Select entry\" -l 15 -i"
 
-pass=$(< $TMP_FILE) \
+encrypt() {
+	openssl enc -aes-256-cbc -pbkdf2 -a -pass env:TMP_KEEPASS_FILE_PASSWORD <<< $1
+}
+decrypt_file() {
+	openssl enc -aes-256-cbc -pbkdf2 -a -d -pass env:TMP_KEEPASS_FILE_PASSWORD -in $1
+}
+
+pass=$(decrypt_file $TMP_KEEPASS_FILE) \
 	|| pass=$(eval $MASTER_PASSWORD_COMMAND < /dev/null) \
 	|| exit 1
 
-[[ $STORE_TMP_FILE == "true" ]] && printf "%s" $pass > $TMP_FILE
+[[ $STORE_TMP_FILE == "true" && ! -e $TMP_KEEPASS_FILE ]] && encrypt $pass > $TMP_KEEPASS_FILE
 
-entries=$(keepassxc-cli ls -Rf -k $KEY_FILE $DATABASE_FILE <<< $pass) || { rm $TMP_FILE ; exit 1; }
+entries=$(keepassxc-cli ls -Rf -k $KEYFILE_PATH $KEEPASS_DATABASE_PATH <<< $pass) || { rm $TMP_KEEPASS_FILE ; exit 1; }
 
 entry=$(eval $SELECT_ENTRY_COMMAND <<< $entries) || exit 1
 
-output=$(keepassxc-cli show -s -k $KEY_FILE $DATABASE_FILE $entry <<< $pass)
+output=$(keepassxc-cli show -s -k $KEYFILE_PATH $KEEPASS_DATABASE_PATH $entry <<< $pass)
 
 username=$(awk -F ':' '/^UserName/ {print $2}' <<< $output)
 pass=$(awk -F ':' '/^Password/ {print $2}' <<< $output)

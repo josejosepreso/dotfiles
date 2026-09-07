@@ -58,3 +58,4 @@
 (package! ef-themes)
 (package! gruber-darker-theme)
 (package! move-text)
+(package! kanagawa-themes)

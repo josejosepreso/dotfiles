@@ -96,16 +96,16 @@
 (global-set-key (kbd "C-d") 'scroll-up-command)
 (global-set-key (kbd "C-u") 'scroll-down-command)
 
-(require 'lsp-java)
-(add-hook 'java-mode-hook #'lsp)
+;; (require 'lsp-java)
+;; (add-hook 'java-mode-hook #'lsp)
 
-(setq lsp-java-vmargs
-      (list
-       "-noverify"
-       "-Xmx1G"
-       "-XX:+UseG1GC"
-       "-XX:+UseStringDeduplication"
-       "-javaagent:/home/jose/.m2/repository/org/projectlombok/lombok/1.18.44/lombok-1.18.44.jar"))
+;; (setq lsp-java-vmargs
+;;       (list
+;;        "-noverify"
+;;        "-Xmx1G"
+;;        "-XX:+UseG1GC"
+;;        "-XX:+UseStringDeduplication"
+;;        "-javaagent:/home/jose/.m2/repository/org/projectlombok/lombok/1.18.44/lombok-1.18.44.jar"))
 
 (use-package move-text
   :ensure t

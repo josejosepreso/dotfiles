@@ -38,6 +38,7 @@ baseConfig = desktopConfig {
       -- spawnOnce "xrandr --output HDMI2 --brightness 0.55"
       spawnOnce "xmodmap ~/.Xmodmap"
       spawnOnce "redshift -P -O 4000"
+      spawnOnce "picom &!"
   } `additionalKeysP` myKeys `removeKeysP` [("M-<Space>")]
 
 
@@ -58,6 +59,7 @@ myManageHook :: ManageHook
 myManageHook = composeAll [ className =? "mpv" --> doShift "vid"
                           , className =? "qutebrowser" --> doShift "www"
                           , className =? "firefox" --> doShift "www"
+                          , className =? "spotify" --> doShift "mus"
                           ]
                
 main :: IO ()
